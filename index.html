@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -63,30 +64,53 @@
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
 
-        object, img, svg {
+        object,
+        img,
+        svg {
             max-width: 100%;
             height: auto;
             border-radius: 8px;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
         @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Responsive */
         @media (max-width: 640px) {
-            h1 { font-size: 2rem; }
-            h2 { font-size: 1.25rem; }
-            .graphic-container { padding: 16px; }
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.25rem;
+            }
+
+            .graphic-container {
+                padding: 16px;
+            }
         }
     </style>
 </head>
+
 <body>
 
     <header>
@@ -94,13 +118,27 @@
         <h2>Crimen en Nueva York</h2>
     </header>
 
-    <main class="graphic-container">
+    <main class="graphic-container" style="flex-direction: column; gap: 40px;">
         <!-- El tag object es ideal para SVGs ya que preserva interactividad -->
         <object data="vis.svg" type="image/svg+xml" aria-label="Gráfico de Crimen en Nueva York">
             <!-- Fallback para cuando el SVG no cargue -->
             <img src="vis.svg" alt="Gráfico de Crimen en Nueva York" />
         </object>
+
+        <div style="width: 100%;">
+            <div class="flourish-embed flourish-chart" data-src="visualisation/27939048">
+                <script src="https://public.flourish.studio/resources/embed.js"></script><noscript><img
+                        src="https://public.flourish.studio/visualisation/27939048/thumbnail" width="100%"
+                        alt="chart visualization" /></noscript>
+            </div>
+        </div>
+    </main>
+
+</body>
+
+</html>
     </main>
 
 </body>
 </html>
+

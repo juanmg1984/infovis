@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RawData</title>
-    <!-- Incluyendo Google Fonts para mejor tipografía -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
@@ -73,13 +72,8 @@
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         @keyframes slideUp {
@@ -87,26 +81,16 @@
                 opacity: 0;
                 transform: translateY(20px);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
 
-        /* Responsive */
         @media (max-width: 640px) {
-            h1 {
-                font-size: 2rem;
-            }
-
-            h2 {
-                font-size: 1.25rem;
-            }
-
-            .graphic-container {
-                padding: 16px;
-            }
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.25rem; }
+            .graphic-container { padding: 16px; }
         }
     </style>
 </head>
@@ -119,26 +103,46 @@
     </header>
 
     <main class="graphic-container" style="flex-direction: column; gap: 40px;">
-        <!-- El tag object es ideal para SVGs ya que preserva interactividad -->
         <object data="vis.svg" type="image/svg+xml" aria-label="Gráfico de Crimen en Nueva York">
-            <!-- Fallback para cuando el SVG no cargue -->
             <img src="vis.svg" alt="Gráfico de Crimen en Nueva York" />
         </object>
 
         <div style="width: 100%;">
             <div class="flourish-embed flourish-chart" data-src="visualisation/27939048">
-                <script src="https://public.flourish.studio/resources/embed.js"></script><noscript><img
-                        src="https://public.flourish.studio/visualisation/27939048/thumbnail" width="100%"
-                        alt="chart visualization" /></noscript>
+                <script src="https://public.flourish.studio/resources/embed.js"></script>
+                <noscript>
+                    <img src="https://public.flourish.studio/visualisation/27939048/thumbnail" width="100%" alt="chart visualization" />
+                </noscript>
             </div>
+        </div>
+
+        <div style="width: 100%;">
+            <iframe
+                title="La guerra de los Toppings"
+                aria-label="Gráfico de rangos"
+                id="datawrapper-chart-4LoCx"
+                src="https://datawrapper.dwcdn.net/4LoCx/1/"
+                scrolling="no"
+                frameborder="0"
+                style="width: 0; min-width: 100% !important; border: none;"
+                height="484"
+                data-external="1">
+            </iframe>
+            <script type="text/javascript">
+                window.addEventListener("message", function(a) {
+                    if (void 0 !== a.data["datawrapper-height"]) {
+                        var e = document.querySelectorAll("iframe");
+                        for (var t in a.data["datawrapper-height"])
+                            for (var r, i = 0; r = e[i]; i++)
+                                if (r.contentWindow === a.source) {
+                                    var d = a.data["datawrapper-height"][t] + "px";
+                                    r.style.height = d;
+                                }
+                    }
+                });
+            </script>
         </div>
     </main>
 
 </body>
-
 </html>
-    </main>
-
-</body>
-</html>
-

@@ -1,0 +1,461 @@
+{
+  "meta": {
+    "source": "Strava export",
+    "sport": "cycling",
+    "generated": "2024",
+    "note_vel_filtered": "vel_avg_filtered only includes rides with avg speed >= 14 km/h"
+  },
+  "totals": {
+    "total_dist_km": 3957.0,
+    "total_rides": 266,
+    "total_tiempo_h": 353.0,
+    "total_desnivel_m": 12497,
+    "total_calorias": 129228,
+    "years_active": [
+      2016,
+      2017,
+      2018,
+      2020,
+      2021,
+      2022,
+      2023,
+      2024
+    ]
+  },
+  "records": {
+    "longest_ride": {
+      "nombre": "Vuelta ciclista por la mañana ☀️",
+      "fecha": "2021-05-02",
+      "dist_km": 90.4,
+      "vel_avg_kmh": 16.9,
+      "vel_max_kmh": 40.0,
+      "tiempo_h": 6.93,
+      "desnivel_m": 153.0
+    },
+    "fastest_ride": {
+      "nombre": "Vuelta ciclista por la tarde ⛅",
+      "fecha": "2022-02-20",
+      "dist_km": 4.9,
+      "vel_avg_kmh": 30.6,
+      "vel_max_kmh": 48.1,
+      "tiempo_h": 0.16,
+      "desnivel_m": 14.0
+    },
+    "most_elevation": {
+      "nombre": "Vuelta ciclista por la mañana ☀️",
+      "fecha": "2020-12-21",
+      "dist_km": 46.0,
+      "vel_avg_kmh": 12.0,
+      "vel_max_kmh": 35.6,
+      "tiempo_h": 4.74,
+      "desnivel_m": 709.0
+    },
+    "longest_time": {
+      "nombre": "Vuelta ciclista por la mañana ☀️",
+      "fecha": "2021-08-22",
+      "dist_km": 71.8,
+      "vel_avg_kmh": 17.2,
+      "vel_max_kmh": 42.8,
+      "tiempo_h": 7.0,
+      "desnivel_m": 62.0
+    }
+  },
+  "by_year": [
+    {
+      "año": 2016,
+      "rides": 25,
+      "dist_total": 503.7,
+      "tiempo_total": 43.4,
+      "vel_avg": 16.3,
+      "desnivel_total": 1822.7,
+      "calorias_total": 14407.0,
+      "vel_avg_filtered": 18.4,
+      "rides_filtered": 21
+    },
+    {
+      "año": 2017,
+      "rides": 6,
+      "dist_total": 108.0,
+      "tiempo_total": 12.1,
+      "vel_avg": 11.7,
+      "desnivel_total": 380.8,
+      "calorias_total": 1311.0,
+      "vel_avg_filtered": 17.0,
+      "rides_filtered": 3
+    },
+    {
+      "año": 2018,
+      "rides": 7,
+      "dist_total": 140.0,
+      "tiempo_total": 15.5,
+      "vel_avg": 13.1,
+      "desnivel_total": 388.5,
+      "calorias_total": 2431.0,
+      "vel_avg_filtered": 18.3,
+      "rides_filtered": 5
+    },
+    {
+      "año": 2020,
+      "rides": 58,
+      "dist_total": 1037.5,
+      "tiempo_total": 66.7,
+      "vel_avg": 16.3,
+      "desnivel_total": 4236.4,
+      "calorias_total": 32012.0,
+      "vel_avg_filtered": 19.6,
+      "rides_filtered": 46
+    },
+    {
+      "año": 2021,
+      "rides": 120,
+      "dist_total": 1534.0,
+      "tiempo_total": 154.2,
+      "vel_avg": 9.7,
+      "desnivel_total": 4074.9,
+      "calorias_total": 54942.0,
+      "vel_avg_filtered": 19.5,
+      "rides_filtered": 58
+    },
+    {
+      "año": 2022,
+      "rides": 37,
+      "dist_total": 362.9,
+      "tiempo_total": 42.2,
+      "vel_avg": 8.8,
+      "desnivel_total": 1056.1,
+      "calorias_total": 13392.0,
+      "vel_avg_filtered": 20.0,
+      "rides_filtered": 15
+    },
+    {
+      "año": 2023,
+      "rides": 11,
+      "dist_total": 217.2,
+      "tiempo_total": 13.6,
+      "vel_avg": 19.3,
+      "desnivel_total": 422.1,
+      "calorias_total": 7906.0,
+      "vel_avg_filtered": 19.3,
+      "rides_filtered": 11
+    },
+    {
+      "año": 2024,
+      "rides": 2,
+      "dist_total": 53.5,
+      "tiempo_total": 5.3,
+      "vel_avg": 15.2,
+      "desnivel_total": 115.5,
+      "calorias_total": 2827.0,
+      "vel_avg_filtered": 18.5,
+      "rides_filtered": 1
+    }
+  ],
+  "by_month": [
+    {
+      "año": 2016,
+      "mes": 3,
+      "dist": 64.5,
+      "rides": 2
+    },
+    {
+      "año": 2016,
+      "mes": 4,
+      "dist": 33.6,
+      "rides": 2
+    },
+    {
+      "año": 2016,
+      "mes": 5,
+      "dist": 132.8,
+      "rides": 7
+    },
+    {
+      "año": 2016,
+      "mes": 6,
+      "dist": 42.2,
+      "rides": 2
+    },
+    {
+      "año": 2016,
+      "mes": 7,
+      "dist": 113.4,
+      "rides": 5
+    },
+    {
+      "año": 2016,
+      "mes": 8,
+      "dist": 73.8,
+      "rides": 3
+    },
+    {
+      "año": 2016,
+      "mes": 10,
+      "dist": 42.4,
+      "rides": 2
+    },
+    {
+      "año": 2016,
+      "mes": 11,
+      "dist": 0.9,
+      "rides": 2
+    },
+    {
+      "año": 2017,
+      "mes": 1,
+      "dist": 26.6,
+      "rides": 1
+    },
+    {
+      "año": 2017,
+      "mes": 3,
+      "dist": 4.6,
+      "rides": 1
+    },
+    {
+      "año": 2017,
+      "mes": 9,
+      "dist": 6.5,
+      "rides": 1
+    },
+    {
+      "año": 2017,
+      "mes": 10,
+      "dist": 3.5,
+      "rides": 1
+    },
+    {
+      "año": 2017,
+      "mes": 11,
+      "dist": 66.9,
+      "rides": 2
+    },
+    {
+      "año": 2018,
+      "mes": 1,
+      "dist": 32.9,
+      "rides": 2
+    },
+    {
+      "año": 2018,
+      "mes": 2,
+      "dist": 29.4,
+      "rides": 1
+    },
+    {
+      "año": 2018,
+      "mes": 4,
+      "dist": 52.3,
+      "rides": 2
+    },
+    {
+      "año": 2018,
+      "mes": 5,
+      "dist": 25.5,
+      "rides": 1
+    },
+    {
+      "año": 2018,
+      "mes": 6,
+      "dist": 0.0,
+      "rides": 1
+    },
+    {
+      "año": 2020,
+      "mes": 8,
+      "dist": 24.6,
+      "rides": 2
+    },
+    {
+      "año": 2020,
+      "mes": 9,
+      "dist": 385.2,
+      "rides": 16
+    },
+    {
+      "año": 2020,
+      "mes": 10,
+      "dist": 209.4,
+      "rides": 9
+    },
+    {
+      "año": 2020,
+      "mes": 11,
+      "dist": 176.5,
+      "rides": 9
+    },
+    {
+      "año": 2020,
+      "mes": 12,
+      "dist": 241.8,
+      "rides": 22
+    },
+    {
+      "año": 2021,
+      "mes": 1,
+      "dist": 116.2,
+      "rides": 19
+    },
+    {
+      "año": 2021,
+      "mes": 2,
+      "dist": 91.1,
+      "rides": 10
+    },
+    {
+      "año": 2021,
+      "mes": 3,
+      "dist": 78.4,
+      "rides": 11
+    },
+    {
+      "año": 2021,
+      "mes": 4,
+      "dist": 71.4,
+      "rides": 10
+    },
+    {
+      "año": 2021,
+      "mes": 5,
+      "dist": 347.1,
+      "rides": 10
+    },
+    {
+      "año": 2021,
+      "mes": 6,
+      "dist": 208.0,
+      "rides": 8
+    },
+    {
+      "año": 2021,
+      "mes": 7,
+      "dist": 95.6,
+      "rides": 7
+    },
+    {
+      "año": 2021,
+      "mes": 8,
+      "dist": 250.6,
+      "rides": 13
+    },
+    {
+      "año": 2021,
+      "mes": 9,
+      "dist": 89.2,
+      "rides": 4
+    },
+    {
+      "año": 2021,
+      "mes": 10,
+      "dist": 134.7,
+      "rides": 11
+    },
+    {
+      "año": 2021,
+      "mes": 11,
+      "dist": 52.0,
+      "rides": 11
+    },
+    {
+      "año": 2021,
+      "mes": 12,
+      "dist": 0.0,
+      "rides": 6
+    },
+    {
+      "año": 2022,
+      "mes": 1,
+      "dist": 38.6,
+      "rides": 6
+    },
+    {
+      "año": 2022,
+      "mes": 2,
+      "dist": 4.9,
+      "rides": 2
+    },
+    {
+      "año": 2022,
+      "mes": 3,
+      "dist": 61.5,
+      "rides": 9
+    },
+    {
+      "año": 2022,
+      "mes": 4,
+      "dist": 106.8,
+      "rides": 7
+    },
+    {
+      "año": 2022,
+      "mes": 5,
+      "dist": 49.9,
+      "rides": 3
+    },
+    {
+      "año": 2022,
+      "mes": 6,
+      "dist": 0.0,
+      "rides": 2
+    },
+    {
+      "año": 2022,
+      "mes": 7,
+      "dist": 0.0,
+      "rides": 6
+    },
+    {
+      "año": 2022,
+      "mes": 8,
+      "dist": 25.9,
+      "rides": 1
+    },
+    {
+      "año": 2022,
+      "mes": 9,
+      "dist": 75.2,
+      "rides": 1
+    },
+    {
+      "año": 2023,
+      "mes": 4,
+      "dist": 92.6,
+      "rides": 5
+    },
+    {
+      "año": 2023,
+      "mes": 5,
+      "dist": 10.3,
+      "rides": 1
+    },
+    {
+      "año": 2023,
+      "mes": 6,
+      "dist": 23.0,
+      "rides": 1
+    },
+    {
+      "año": 2023,
+      "mes": 7,
+      "dist": 57.3,
+      "rides": 2
+    },
+    {
+      "año": 2023,
+      "mes": 9,
+      "dist": 5.7,
+      "rides": 1
+    },
+    {
+      "año": 2023,
+      "mes": 12,
+      "dist": 28.2,
+      "rides": 1
+    },
+    {
+      "año": 2024,
+      "mes": 1,
+      "dist": 53.5,
+      "rides": 2
+    }
+  ]
+}

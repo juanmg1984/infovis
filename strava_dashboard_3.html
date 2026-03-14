@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strava · Dashboard de Bicicleta</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg: #0d0f14;
+    --bg2: #13161e;
+    --bg3: #1a1e28;
+    --card: #181c26;
+    --border: #252a38;
+    --orange: #f05a1a;
+    --orange2: #ff7a3d;
+    --yellow: #f5c842;
+    --teal: #2be8c4;
+    --muted: #4a5268;
+    --text: #e8eaf2;
+    --text2: #8b90a8;
+    --text3: #5a607a;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* NOISE TEXTURE */
+  body::before {
+    content:'';
+    position:fixed; inset:0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events:none; z-index:0;
+  }
+
+  .wrap { max-width:1200px; margin:0 auto; padding:0 24px; position:relative; z-index:1; }
+
+  /* HEADER */
+  header {
+    border-bottom: 1px solid var(--border);
+    padding: 28px 0 24px;
+    margin-bottom: 40px;
+  }
+  .header-inner { display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:16px; }
+  .logo { display:flex; align-items:center; gap:14px; }
+  .logo-icon {
+    width:44px; height:44px; background: var(--orange);
+    border-radius:10px; display:flex; align-items:center; justify-content:center;
+    font-size:22px;
+  }
+  .logo-text { line-height:1; }
+  .logo-text h1 { font-family:'Bebas Neue'; font-size:28px; letter-spacing:2px; color: var(--text); }
+  .logo-text span { font-size:11px; color: var(--text3); letter-spacing:3px; text-transform:uppercase; }
+  .header-right { font-size:12px; color: var(--text3); text-align:right; line-height:1.8; }
+  .header-right strong { color: var(--orange); }
+
+  /* KPI STRIP */
+  .kpi-strip {
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap:2px;
+    background: var(--border);
+    border-radius:16px;
+    overflow:hidden;
+    margin-bottom:32px;
+  }
+  .kpi {
+    background: var(--card);
+    padding:24px 20px;
+    position:relative;
+    overflow:hidden;
+    transition: background .2s;
+  }
+  .kpi:hover { background: var(--bg3); }
+  .kpi::after {
+    content:'';
+    position:absolute;
+    bottom:0; left:0; right:0;
+    height:2px;
+    background: var(--orange);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .3s ease;
+  }
+  .kpi:hover::after { transform: scaleX(1); }
+  .kpi-label { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--text3); margin-bottom:8px; }
+  .kpi-val { font-family:'Bebas Neue'; font-size:46px; line-height:1; color:var(--text); }
+  .kpi-unit { font-size:13px; color:var(--text2); margin-top:4px; font-weight:300; }
+  .kpi-accent .kpi-val { color: var(--orange); }
+
+  /* SECTION */
+  section { margin-bottom:40px; }
+  .section-title {
+    font-family:'Bebas Neue'; font-size:22px; letter-spacing:2px;
+    color: var(--text3); text-transform:uppercase;
+    margin-bottom:20px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .section-title::after { content:''; flex:1; height:1px; background:var(--border); }
+
+  /* GRID LAYOUTS */
+  .grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  .grid-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px; }
+
+  /* CARD */
+  .card {
+    background: var(--card);
+    border-radius:14px;
+    border:1px solid var(--border);
+    padding:24px;
+    position:relative;
+    overflow:hidden;
+  }
+  .card-title {
+    font-size:11px; letter-spacing:2px; text-transform:uppercase;
+    color:var(--text3); margin-bottom:18px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .dot { width:6px; height:6px; border-radius:50%; background:var(--orange); }
+
+  /* YEAR TABLE */
+  .year-table { width:100%; border-collapse:collapse; }
+  .year-table thead tr th {
+    font-size:10px; letter-spacing:1.5px; text-transform:uppercase;
+    color:var(--text3); font-weight:500; padding:0 0 12px;
+    text-align:right; border-bottom:1px solid var(--border);
+  }
+  .year-table thead tr th:first-child { text-align:left; }
+  .year-table tbody tr {
+    border-bottom:1px solid #1e2232;
+    transition: background .15s;
+    cursor:default;
+  }
+  .year-table tbody tr:hover { background:#1e2434; }
+  .year-table tbody tr td {
+    padding:11px 0; font-size:14px;
+    text-align:right; color:var(--text2);
+    font-family:'DM Mono'; font-size:13px;
+  }
+  .year-table tbody tr td:first-child {
+    font-family:'Bebas Neue'; font-size:20px;
+    color:var(--text); text-align:left; letter-spacing:1px;
+  }
+  .bar-cell { position:relative; min-width:90px; }
+  .bar-bg { background: var(--bg3); border-radius:3px; height:6px; width:80px; overflow:hidden; display:inline-block; margin-left:8px; vertical-align:middle; }
+  .bar-fill { height:100%; border-radius:3px; background: var(--orange); transition:width .6s ease; }
+  .best-year td { color: var(--text) !important; }
+  .best-year td:first-child { color: var(--orange) !important; }
+
+  /* HEATMAP */
+  .heatmap-wrap { overflow-x:auto; }
+  .heatmap { display:grid; grid-template-columns: 60px repeat(12, 1fr); gap:4px; min-width:600px; }
+  .hm-label { font-size:11px; color:var(--text3); display:flex; align-items:center; font-family:'Bebas Neue'; letter-spacing:1px; font-size:15px; }
+  .hm-month-header { font-size:10px; color:var(--text3); text-align:center; letter-spacing:1px; padding-bottom:4px; }
+  .hm-cell {
+    height:36px; border-radius:6px;
+    background:var(--bg3);
+    position:relative; cursor:default;
+    transition: transform .15s;
+  }
+  .hm-cell:hover { transform:scale(1.08); z-index:10; }
+  .hm-cell .tooltip {
+    display:none;
+    position:absolute;
+    bottom:calc(100% + 8px);
+    left:50%; transform:translateX(-50%);
+    background:#222840;
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:8px 12px;
+    font-size:12px;
+    white-space:nowrap;
+    z-index:100;
+    color: var(--text);
+    pointer-events:none;
+  }
+  .hm-cell:hover .tooltip { display:block; }
+  .hm-empty { background:transparent !important; }
+
+  /* RECORDS */
+  .records-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+  .record-card {
+    background: var(--bg3);
+    border-radius:12px;
+    padding:20px;
+    border:1px solid var(--border);
+    position:relative;
+    overflow:hidden;
+    transition: border-color .2s, transform .2s;
+  }
+  .record-card:hover { border-color: var(--orange); transform:translateY(-2px); }
+  .record-card::before {
+    content:attr(data-icon);
+    position:absolute; top:-4px; right:12px;
+    font-size:48px; opacity:.07;
+    pointer-events:none;
+  }
+  .record-badge {
+    font-size:9px; letter-spacing:2px; text-transform:uppercase;
+    color: var(--orange); font-weight:600; margin-bottom:12px;
+    display:flex; align-items:center; gap:6px;
+  }
+  .record-name { font-size:13px; color:var(--text); margin-bottom:4px; font-weight:500; line-height:1.3; }
+  .record-date { font-size:11px; color:var(--text3); margin-bottom:14px; }
+  .record-stats { display:flex; flex-direction:column; gap:6px; }
+  .record-stat { display:flex; justify-content:space-between; align-items:center; }
+  .record-stat-label { font-size:11px; color:var(--text3); }
+  .record-stat-val { font-family:'DM Mono'; font-size:13px; color:var(--teal); font-weight:500; }
+  .record-big { font-family:'Bebas Neue'; font-size:36px; color:var(--orange2); line-height:1; margin-bottom:2px; }
+  .record-big-unit { font-size:12px; color:var(--text2); }
+
+  /* CHART CONTAINERS */
+  .chart-box { position:relative; height:220px; }
+
+  /* VELOCITY EVOLUTION */
+  .vel-chart-box { position:relative; height:200px; }
+
+  /* TAB SWITCHER */
+  .tab-group { display:flex; gap:4px; margin-bottom:20px; }
+  .tab-btn {
+    padding:6px 16px; border-radius:20px; border:1px solid var(--border);
+    background:transparent; color:var(--text3); font-size:12px;
+    font-family:'DM Sans'; cursor:pointer; transition:all .2s; letter-spacing:.5px;
+  }
+  .tab-btn.active {
+    background:var(--orange); border-color:var(--orange); color:#fff;
+  }
+  .tab-btn:hover:not(.active) { border-color:var(--text3); color:var(--text); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(18px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+  .kpi { animation: fadeUp .4s ease both; }
+  .kpi:nth-child(1){animation-delay:.05s}
+  .kpi:nth-child(2){animation-delay:.1s}
+  .kpi:nth-child(3){animation-delay:.15s}
+  .kpi:nth-child(4){animation-delay:.2s}
+  .card { animation: fadeUp .4s ease both; animation-delay:.25s; }
+
+  /* RESPONSIVE */
+  @media(max-width:900px){
+    .kpi-strip { grid-template-columns:repeat(2,1fr); }
+    .grid-2, .grid-3 { grid-template-columns:1fr; }
+    .records-grid { grid-template-columns:repeat(2,1fr); }
+  }
+  @media(max-width:560px){
+    .records-grid { grid-template-columns:1fr; }
+    .kpi-val { font-size:36px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header>
+    <div class="header-inner">
+      <div class="logo">
+        <div class="logo-icon">🚴</div>
+        <div class="logo-text">
+          <h1>Cycling Stats</h1>
+          <span>Strava · 2016 – 2024</span>
+        </div>
+      </div>
+      <div class="header-right">
+        Datos exportados de <strong>Strava</strong><br>
+        266 salidas · 8 años de rodados
+      </div>
+    </div>
+  </header>
+
+  <!-- KPI STRIP -->
+  <div class="kpi-strip">
+    <div class="kpi kpi-accent">
+      <div class="kpi-label">Distancia Total</div>
+      <div class="kpi-val">3.957</div>
+      <div class="kpi-unit">kilómetros recorridos</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Salidas</div>
+      <div class="kpi-val">266</div>
+      <div class="kpi-unit">rides en bici</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Tiempo en Ruta</div>
+      <div class="kpi-val">353</div>
+      <div class="kpi-unit">horas pedaleando</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Desnivel Total</div>
+      <div class="kpi-val">12.497</div>
+      <div class="kpi-unit">metros de ascenso</div>
+    </div>
+  </div>
+
+  <!-- YEAR TABLE + BAR CHART -->
+  <section>
+    <div class="section-title">📅 Por Año</div>
+    <div class="grid-2">
+
+      <div class="card">
+        <div class="card-title"><span class="dot"></span>Resumen anual</div>
+        <table class="year-table">
+          <thead>
+            <tr>
+              <th>Año</th>
+              <th>Salidas</th>
+              <th>Distancia</th>
+              <th>Vel. prom.</th>
+              <th>Horas</th>
+            </tr>
+          </thead>
+          <tbody id="year-tbody"></tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span class="dot"></span>Distancia por año (km)</div>
+        <div class="tab-group">
+          <button class="tab-btn active" onclick="switchMetric('dist')">Distancia</button>
+          <button class="tab-btn" onclick="switchMetric('rides')">Salidas</button>
+          <button class="tab-btn" onclick="switchMetric('horas')">Horas</button>
+        </div>
+        <div class="chart-box">
+          <canvas id="yearChart"></canvas>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- HEATMAP -->
+  <section>
+    <div class="section-title">🗓 Actividad Mensual</div>
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>Distancia por mes (km) — intensidad de color</div>
+      <div class="heatmap-wrap">
+        <div class="heatmap" id="heatmap"></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;margin-top:16px;">
+        <span style="font-size:11px;color:var(--text3)">Sin datos</span>
+        <div style="display:flex;gap:3px">
+          <div style="width:18px;height:12px;border-radius:3px;background:#1a1e28"></div>
+          <div style="width:18px;height:12px;border-radius:3px;background:#3a2010"></div>
+          <div style="width:18px;height:12px;border-radius:3px;background:#6b3a18"></div>
+          <div style="width:18px;height:12px;border-radius:3px;background:#c05016"></div>
+          <div style="width:18px;height:12px;border-radius:3px;background:#f05a1a"></div>
+        </div>
+        <span style="font-size:11px;color:var(--text3)">+ km</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- VELOCITY TREND -->
+  <section>
+    <div class="section-title">⚡ Velocidad Promedio</div>
+    <div class="card">
+      <div class="card-title"><span class="dot"></span>Velocidad promedio por año (km/h) <span style="color:var(--text3);font-size:10px;margin-left:6px;">· solo salidas ≥ 14 km/h</span></div>
+      <div class="vel-chart-box">
+        <canvas id="velChart"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- RECORDS -->
+  <section>
+    <div class="section-title">🏆 Récords Personales</div>
+    <div class="records-grid">
+
+      <div class="record-card" data-icon="📏">
+        <div class="record-badge">🗺 Ride más largo</div>
+        <div class="record-big">90.4<span class="record-big-unit"> km</span></div>
+        <div class="record-name">Vuelta ciclista por la mañana ☀️</div>
+        <div class="record-date">2 de mayo, 2021</div>
+        <div class="record-stats">
+          <div class="record-stat"><span class="record-stat-label">Velocidad prom.</span><span class="record-stat-val">16.9 km/h</span></div>
+          <div class="record-stat"><span class="record-stat-label">Tiempo</span><span class="record-stat-val">6h 56min</span></div>
+          <div class="record-stat"><span class="record-stat-label">Desnivel</span><span class="record-stat-val">153 m</span></div>
+        </div>
+      </div>
+
+      <div class="record-card" data-icon="⚡">
+        <div class="record-badge">🚀 Más veloz</div>
+        <div class="record-big">30.6<span class="record-big-unit"> km/h</span></div>
+        <div class="record-name">Vuelta ciclista por la tarde ⛅</div>
+        <div class="record-date">20 de febrero, 2022</div>
+        <div class="record-stats">
+          <div class="record-stat"><span class="record-stat-label">Distancia</span><span class="record-stat-val">4.9 km</span></div>
+          <div class="record-stat"><span class="record-stat-label">Vel. máxima</span><span class="record-stat-val">48.1 km/h</span></div>
+          <div class="record-stat"><span class="record-stat-label">Desnivel</span><span class="record-stat-val">14 m</span></div>
+        </div>
+      </div>
+
+      <div class="record-card" data-icon="⛰">
+        <div class="record-badge">⛰ Mayor desnivel</div>
+        <div class="record-big">709<span class="record-big-unit"> m</span></div>
+        <div class="record-name">Vuelta ciclista por la mañana ☀️</div>
+        <div class="record-date">21 de diciembre, 2020</div>
+        <div class="record-stats">
+          <div class="record-stat"><span class="record-stat-label">Distancia</span><span class="record-stat-val">46.0 km</span></div>
+          <div class="record-stat"><span class="record-stat-label">Velocidad prom.</span><span class="record-stat-val">12.0 km/h</span></div>
+          <div class="record-stat"><span class="record-stat-label">Tiempo</span><span class="record-stat-val">4h 44min</span></div>
+        </div>
+      </div>
+
+      <div class="record-card" data-icon="⏱">
+        <div class="record-badge">⏱ Más tiempo en ruta</div>
+        <div class="record-big">7h<span class="record-big-unit"> 00min</span></div>
+        <div class="record-name">Vuelta ciclista por la mañana ☀️</div>
+        <div class="record-date">22 de agosto, 2021</div>
+        <div class="record-stats">
+          <div class="record-stat"><span class="record-stat-label">Distancia</span><span class="record-stat-val">71.8 km</span></div>
+          <div class="record-stat"><span class="record-stat-label">Vel. máxima</span><span class="record-stat-val">42.8 km/h</span></div>
+          <div class="record-stat"><span class="record-stat-label">Desnivel</span><span class="record-stat-val">62 m</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- STRAVA WIDGET -->
+  <section>
+    <div class="section-title">🟠 Últimas Salidas en Strava</div>
+    <div class="card" style="display:flex;align-items:flex-start;gap:32px;flex-wrap:wrap;">
+      <div style="flex-shrink:0;">
+        <iframe height='454' width='300' frameborder='0' allowtransparency='true' scrolling='no'
+          src='https://www.strava.com/athletes/12098590/latest-rides/188749c053528537a718f78b8aeca85714bbe1cf'
+          style="border-radius:10px;display:block;">
+        </iframe>
+      </div>
+      <div style="flex:1;min-width:200px;padding-top:8px;">
+        <div style="font-family:'Bebas Neue';font-size:32px;color:var(--orange);letter-spacing:1px;margin-bottom:6px;">Actividad reciente</div>
+        <div style="font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:20px;">
+          Tus últimas salidas en tiempo real, directo desde Strava.<br>
+          El widget se actualiza automáticamente cada vez que registrás una nueva actividad.
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div style="background:var(--bg3);border-radius:10px;padding:14px 16px;border:1px solid var(--border);">
+            <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:4px;">Promedio histórico</div>
+            <div style="font-family:'Bebas Neue';font-size:24px;color:var(--text);">14.9 <span style="font-size:14px;color:var(--text2);font-family:'DM Sans'">km/h</span></div>
+          </div>
+          <div style="background:var(--bg3);border-radius:10px;padding:14px 16px;border:1px solid var(--border);">
+            <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:4px;">Distancia promedio por salida</div>
+            <div style="font-family:'Bebas Neue';font-size:24px;color:var(--text);">14.9 <span style="font-size:14px;color:var(--text2);font-family:'DM Sans'">km</span></div>
+          </div>
+          <div style="background:var(--bg3);border-radius:10px;padding:14px 16px;border:1px solid var(--border);">
+            <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-bottom:4px;">Calorías quemadas totales</div>
+            <div style="font-family:'Bebas Neue';font-size:24px;color:var(--text);">129.228 <span style="font-size:14px;color:var(--text2);font-family:'DM Sans'">kcal</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer style="border-top:1px solid var(--border);padding:24px 0;margin-top:20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+    <span style="font-size:12px;color:var(--text3)">Generado a partir de datos exportados de Strava · 2016–2024</span>
+    <span style="font-size:12px;color:var(--text3)">🚴 <strong style="color:var(--orange)">3.957 km</strong> de historia sobre dos ruedas</span>
+  </footer>
+
+</div><!-- /wrap -->
+
+<script>
+const DATA = {
+  by_year: [
+    {año:2016,rides:25,dist_total:503.7,tiempo_total:43.4,vel_avg:16.3,desnivel_total:1822.7},
+    {año:2017,rides:6,dist_total:108.0,tiempo_total:12.1,vel_avg:11.7,desnivel_total:380.8},
+    {año:2018,rides:7,dist_total:140.0,tiempo_total:15.5,vel_avg:13.1,desnivel_total:388.5},
+    {año:2020,rides:58,dist_total:1037.5,tiempo_total:66.7,vel_avg:16.3,desnivel_total:4236.4},
+    {año:2021,rides:120,dist_total:1534.0,tiempo_total:154.2,vel_avg:9.7,desnivel_total:4074.9},
+    {año:2022,rides:37,dist_total:362.9,tiempo_total:42.2,vel_avg:8.8,desnivel_total:1056.1},
+    {año:2023,rides:11,dist_total:217.2,tiempo_total:13.6,vel_avg:19.3,desnivel_total:422.1},
+    {año:2024,rides:2,dist_total:53.5,tiempo_total:5.3,vel_avg:15.2,desnivel_total:115.5},
+  ],
+  by_month: [
+    {año:2016,mes:3,dist:64.5,rides:2},{año:2016,mes:4,dist:33.6,rides:2},{año:2016,mes:5,dist:132.8,rides:7},{año:2016,mes:6,dist:42.2,rides:2},{año:2016,mes:7,dist:113.4,rides:5},{año:2016,mes:8,dist:73.8,rides:3},{año:2016,mes:10,dist:42.4,rides:2},{año:2016,mes:11,dist:0.9,rides:2},
+    {año:2017,mes:1,dist:26.6,rides:1},{año:2017,mes:3,dist:4.6,rides:1},{año:2017,mes:9,dist:6.5,rides:1},{año:2017,mes:10,dist:3.5,rides:1},{año:2017,mes:11,dist:66.9,rides:2},
+    {año:2018,mes:1,dist:32.9,rides:2},{año:2018,mes:2,dist:29.4,rides:1},{año:2018,mes:4,dist:52.3,rides:2},{año:2018,mes:5,dist:25.5,rides:1},{año:2018,mes:6,dist:0.0,rides:1},
+    {año:2020,mes:8,dist:24.6,rides:2},{año:2020,mes:9,dist:385.2,rides:16},{año:2020,mes:10,dist:209.4,rides:9},{año:2020,mes:11,dist:176.5,rides:9},{año:2020,mes:12,dist:241.8,rides:22},
+    {año:2021,mes:1,dist:116.2,rides:19},{año:2021,mes:2,dist:91.1,rides:10},{año:2021,mes:3,dist:78.4,rides:11},{año:2021,mes:4,dist:71.4,rides:10},{año:2021,mes:5,dist:347.1,rides:10},{año:2021,mes:6,dist:208.0,rides:8},{año:2021,mes:7,dist:95.6,rides:7},{año:2021,mes:8,dist:250.6,rides:13},{año:2021,mes:9,dist:89.2,rides:4},{año:2021,mes:10,dist:134.7,rides:11},{año:2021,mes:11,dist:52.0,rides:11},{año:2021,mes:12,dist:0.0,rides:6},
+    {año:2022,mes:1,dist:38.6,rides:6},{año:2022,mes:2,dist:4.9,rides:2},{año:2022,mes:3,dist:61.5,rides:9},{año:2022,mes:4,dist:106.8,rides:7},{año:2022,mes:5,dist:49.9,rides:3},{año:2022,mes:6,dist:0.0,rides:2},{año:2022,mes:7,dist:0.0,rides:6},{año:2022,mes:8,dist:25.9,rides:1},{año:2022,mes:9,dist:75.2,rides:1},
+    {año:2023,mes:4,dist:92.6,rides:5},{año:2023,mes:5,dist:10.3,rides:1},{año:2023,mes:6,dist:23.0,rides:1},{año:2023,mes:7,dist:57.3,rides:2},{año:2023,mes:9,dist:5.7,rides:1},{año:2023,mes:12,dist:28.2,rides:1},
+    {año:2024,mes:1,dist:53.5,rides:2},
+  ]
+};
+
+const MESES = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+const AÑOS = [2016,2017,2018,2020,2021,2022,2023,2024];
+const maxDist = Math.max(...DATA.by_year.map(d=>d.dist_total));
+
+// ---- YEAR TABLE ----
+const tbody = document.getElementById('year-tbody');
+DATA.by_year.forEach(y => {
+  const isBest = y.dist_total === maxDist;
+  const pct = (y.dist_total / maxDist * 100).toFixed(0);
+  tbody.innerHTML += `
+    <tr class="${isBest?'best-year':''}">
+      <td>${y.año}${isBest?' ★':''}</td>
+      <td>${y.rides}</td>
+      <td>
+        <span>${y.dist_total.toFixed(0)} km</span>
+        <span class="bar-bg"><span class="bar-fill" style="width:${pct}%"></span></span>
+      </td>
+      <td>${y.vel_avg} km/h</td>
+      <td>${y.tiempo_total.toFixed(0)}h</td>
+    </tr>`;
+});
+
+// ---- YEAR BAR CHART ----
+const ctx = document.getElementById('yearChart').getContext('2d');
+let currentMetric = 'dist';
+let yearChart;
+
+function getMetricData(metric) {
+  if(metric==='dist') return {data: DATA.by_year.map(d=>d.dist_total.toFixed(0)), label:'Distancia (km)', color:'#f05a1a'};
+  if(metric==='rides') return {data: DATA.by_year.map(d=>d.rides), label:'Salidas', color:'#2be8c4'};
+  if(metric==='horas') return {data: DATA.by_year.map(d=>d.tiempo_total.toFixed(1)), label:'Horas', color:'#f5c842'};
+}
+
+function buildYearChart(metric) {
+  const m = getMetricData(metric);
+  if(yearChart) yearChart.destroy();
+  yearChart = new Chart(ctx, {
+    type:'bar',
+    data:{
+      labels: DATA.by_year.map(d=>d.año),
+      datasets:[{
+        label: m.label,
+        data: m.data,
+        backgroundColor: DATA.by_year.map(d => d.dist_total===maxDist && metric==='dist' ? '#ff7a3d' : m.color+'99'),
+        borderColor: DATA.by_year.map(d => d.dist_total===maxDist && metric==='dist' ? '#ff7a3d' : m.color),
+        borderWidth:1, borderRadius:5
+      }]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{legend:{display:false}, tooltip:{
+        backgroundColor:'#1e2434', borderColor:'#252a38', borderWidth:1,
+        titleColor:'#e8eaf2', bodyColor:'#8b90a8',
+        callbacks:{label: ctx=>`${ctx.parsed.y} ${metric==='dist'?'km':metric==='horas'?'h':'salidas'}`}
+      }},
+      scales:{
+        x:{ticks:{color:'#5a607a', font:{size:12}}, grid:{color:'transparent'}},
+        y:{ticks:{color:'#5a607a', font:{size:11}}, grid:{color:'#1e2232'}}
+      }
+    }
+  });
+}
+buildYearChart('dist');
+
+function switchMetric(m) {
+  currentMetric = m;
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>{
+    b.classList.toggle('active', ['dist','rides','horas'][i]===m);
+  });
+  buildYearChart(m);
+}
+
+// ---- HEATMAP ----
+const hmWrap = document.getElementById('heatmap');
+// Build lookup
+const lookup = {};
+DATA.by_month.forEach(d=>{ lookup[`${d.año}-${d.mes}`]={dist:d.dist,rides:d.rides}; });
+const allDists = DATA.by_month.map(d=>d.dist).filter(d=>d>0);
+const maxMonthDist = Math.max(...allDists);
+
+function distToColor(d) {
+  if(!d || d<=0) return '#1a1e28';
+  const t = d/maxMonthDist;
+  if(t<0.1) return '#2a1810';
+  if(t<0.25) return '#3a2010';
+  if(t<0.5) return '#5a3014';
+  if(t<0.75) return '#c05016';
+  return '#f05a1a';
+}
+
+// Header row
+hmWrap.appendChild(Object.assign(document.createElement('div'),{className:'hm-label',textContent:''}));
+MESES.forEach(m=>{
+  const el = document.createElement('div');
+  el.className = 'hm-month-header';
+  el.textContent = m;
+  hmWrap.appendChild(el);
+});
+
+// Data rows
+AÑOS.forEach(y=>{
+  const label = document.createElement('div');
+  label.className = 'hm-label';
+  label.textContent = y;
+  hmWrap.appendChild(label);
+
+  for(let m=1;m<=12;m++){
+    const cell = document.createElement('div');
+    const entry = lookup[`${y}-${m}`];
+    cell.className = 'hm-cell';
+    if(entry){
+      cell.style.background = distToColor(entry.dist);
+      const tt = document.createElement('div');
+      tt.className='tooltip';
+      tt.innerHTML = `<strong>${MESES[m-1]} ${y}</strong><br>${entry.dist} km · ${entry.rides} salidas`;
+      cell.appendChild(tt);
+    } else {
+      cell.classList.add('hm-empty');
+    }
+    hmWrap.appendChild(cell);
+  }
+});
+
+// ---- VEL CHART ----
+const velCtx = document.getElementById('velChart').getContext('2d');
+new Chart(velCtx, {
+  type:'line',
+  data:{
+    labels: DATA.by_year.map(d=>d.año),
+    datasets:[{
+      label:'km/h',
+      data: [18.4, 17.0, 18.3, 19.6, 19.5, 20.0, 19.3, 18.5],
+      borderColor:'#2be8c4',
+      backgroundColor:'#2be8c41a',
+      pointBackgroundColor:'#2be8c4',
+      pointRadius:5, pointHoverRadius:7,
+      borderWidth:2, tension:.3, fill:true
+    }]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{display:false}, tooltip:{
+      backgroundColor:'#1e2434',borderColor:'#252a38',borderWidth:1,
+      titleColor:'#e8eaf2',bodyColor:'#8b90a8',
+      callbacks:{label:c=>`${c.parsed.y} km/h promedio`}
+    }},
+    scales:{
+      x:{ticks:{color:'#5a607a',font:{size:12}},grid:{color:'transparent'}},
+      y:{ticks:{color:'#5a607a',font:{size:11},callback:v=>v+' km/h'},grid:{color:'#1e2232'},min:14}
+    }
+  }
+});
+</script>
+</body>
+</html>

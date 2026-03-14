@@ -98,51 +98,102 @@
 <body>
 
     <header>
-        <h1>Infovis Ejemplo Rawgraph</h1>
+        <h2>Ejemplo Rawgraph</h2>
         <h2>Crimen en Nueva York</h2>
     </header>
 
-    <main class="graphic-container" style="flex-direction: column; gap: 40px;">
-        <object data="vis.svg" type="image/svg+xml" aria-label="Gráfico de Crimen en Nueva York">
-            <img src="vis.svg" alt="Gráfico de Crimen en Nueva York" />
-        </object>
+    <main style="display: flex; flex-direction: column; align-items: center; gap: 40px; width: 100%;">
 
-        <div style="width: 100%;">
-            <div class="flourish-embed flourish-chart" data-src="visualisation/27939048">
-                <script src="https://public.flourish.studio/resources/embed.js"></script>
-                <noscript>
-                    <img src="https://public.flourish.studio/visualisation/27939048/thumbnail" width="100%" alt="chart visualization" />
-                </noscript>
+        <div class="graphic-container" style="flex-direction: column; gap: 40px;">
+            <object data="vis.svg" type="image/svg+xml" aria-label="Gráfico de Crimen en Nueva York">
+                <img src="vis.svg" alt="Gráfico de Crimen en Nueva York" />
+            </object>
+        </div>
+
+        <div class="graphic-container">
+            <div style="width: 100%;">
+                <div class="flourish-embed flourish-chart" data-src="visualisation/27939048">
+                    <script src="https://public.flourish.studio/resources/embed.js"></script>
+                    <noscript>
+                        <img src="https://public.flourish.studio/visualisation/27939048/thumbnail" width="100%" alt="chart visualization" />
+                    </noscript>
+                </div>
             </div>
         </div>
-        
 
-        <div style="width: 100%;">
-            <iframe
-                title="La guerra de los Toppings"
-                aria-label="Gráfico de rangos"
-                id="datawrapper-chart-4LoCx"
-                src="https://datawrapper.dwcdn.net/4LoCx/1/"
-                scrolling="no"
-                frameborder="0"
-                style="width: 0; min-width: 100% !important; border: none;"
-                height="484"
-                data-external="1">
-            </iframe>
-            <script type="text/javascript">
-                window.addEventListener("message", function(a) {
-                    if (void 0 !== a.data["datawrapper-height"]) {
-                        var e = document.querySelectorAll("iframe");
-                        for (var t in a.data["datawrapper-height"])
-                            for (var r, i = 0; r = e[i]; i++)
-                                if (r.contentWindow === a.source) {
-                                    var d = a.data["datawrapper-height"][t] + "px";
-                                    r.style.height = d;
-                                }
-                    }
-                });
-            </script>
+        <div class="graphic-container">
+            <div style="width: 100%;">
+                <iframe
+                    title="La guerra de los Toppings"
+                    aria-label="Gráfico de rangos"
+                    id="datawrapper-chart-4LoCx"
+                    src="https://datawrapper.dwcdn.net/4LoCx/1/"
+                    scrolling="no"
+                    frameborder="0"
+                    style="width: 0; min-width: 100% !important; border: none;"
+                    height="484"
+                    data-external="1">
+                </iframe>
+                <script type="text/javascript">
+                    window.addEventListener("message", function(a) {
+                        if (void 0 !== a.data["datawrapper-height"]) {
+                            var e = document.querySelectorAll("iframe");
+                            for (var t in a.data["datawrapper-height"])
+                                for (var r, i = 0; r = e[i]; i++)
+                                    if (r.contentWindow === a.source) {
+                                        var d = a.data["datawrapper-height"][t] + "px";
+                                        r.style.height = d;
+                                    }
+                        }
+                    });
+                </script>
+            </div>
         </div>
+
+        <div class="graphic-container">
+            <div style="width: 100%;">
+                <div class="tableauPlaceholder" id="viz1773502519032" style="position: relative;">
+                    <noscript>
+                        <a href="#">
+                            <img alt="Dashboard 1" src="https://public.tableau.com/static/images/Ai/AirbnbenArgentina-enerodel2026/Dashboard1/1_rss.png" style="border: none" />
+                        </a>
+                    </noscript>
+                    <object class="tableauViz" style="display:none;">
+                        <param name="host_url" value="https%3A%2F%2Fpublic.tableau.com%2F" />
+                        <param name="embed_code_version" value="3" />
+                        <param name="site_root" value="" />
+                        <param name="name" value="AirbnbenArgentina-enerodel2026/Dashboard1" />
+                        <param name="tabs" value="no" />
+                        <param name="toolbar" value="yes" />
+                        <param name="static_image" value="https://public.tableau.com/static/images/Ai/AirbnbenArgentina-enerodel2026/Dashboard1/1.png" />
+                        <param name="animate_transition" value="yes" />
+                        <param name="display_static_image" value="yes" />
+                        <param name="display_spinner" value="yes" />
+                        <param name="display_overlay" value="yes" />
+                        <param name="display_count" value="yes" />
+                        <param name="language" value="es-ES" />
+                    </object>
+                </div>
+                <script type="text/javascript">
+                    var divElement = document.getElementById('viz1773502519032');
+                    var vizElement = divElement.getElementsByTagName('object')[0];
+                    if (divElement.offsetWidth > 800) {
+                        vizElement.style.width = '900px';
+                        vizElement.style.height = '1627px';
+                    } else if (divElement.offsetWidth > 500) {
+                        vizElement.style.width = '900px';
+                        vizElement.style.height = '1627px';
+                    } else {
+                        vizElement.style.width = '100%';
+                        vizElement.style.height = '1227px';
+                    }
+                    var scriptElement = document.createElement('script');
+                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+                    vizElement.parentNode.insertBefore(scriptElement, vizElement);
+                </script>
+            </div>
+        </div>
+
     </main>
 
 </body>

@@ -1,7 +1,11 @@
 # 🚴 Dos ruedas, muchos datos
+### Visualización de datos personales · ECD 2025
 
 Exploración visual de 266 salidas en bicicleta registradas en Strava entre 2016 y 2024. El proyecto toma datos personales exportados de una app de actividad física y los transforma en cuatro visualizaciones que cuentan una historia: hábitos, evolución, clima y el paso del tiempo.
 
+🔗 **[Ver proyecto en vivo](https://TU-USUARIO.github.io/TU-REPO/index_tp.html)**
+
+---
 
 ## 📁 Archivos del proyecto
 
@@ -22,7 +26,7 @@ Exploración visual de 266 salidas en bicicleta registradas en Strava entre 2016
 
 ---
 
-## De dónde vienen los datos
+## 🗂 De dónde vienen los datos
 
 Strava permite exportar el historial completo de actividades desde **Configuración → Mi cuenta → Descargar datos**. El archivo descargado es un `.zip` que contiene, entre otras cosas, un archivo llamado `activities.csv` con una fila por cada actividad registrada.
 
@@ -30,7 +34,7 @@ Ese archivo fue el punto de partida de todo el proyecto. Contiene información c
 
 ---
 
-##  Cómo transformamos los datos para cada visualización
+## 🔄 Cómo transformamos los datos para cada visualización
 
 ### 1 · DataWrapper — *¿En qué meses pedaleo más?*
 
@@ -69,6 +73,7 @@ El proceso fue:
 - Filtrar únicamente las salidas que tenían datos de viento registrados
 - Aplicar el mismo filtro de calidad que en el beeswarm: solo salidas con más de 1 km y velocidad promedio mayor a 14 km/h (para excluir registros donde el GPS no descontó las pausas)
 - Agregar una columna con el **año** de cada salida, para poder colorear los puntos por año en Flourish
+- Agregar una columna de **categoría de distancia** (corta, media, larga, muy larga) como dimensión adicional de exploración
 - El resultado fue un scatter donde cada punto es una salida, el eje X muestra el viento y el eje Y la velocidad
 
 La correlación entre viento y velocidad resultó ser de **-0.66**: a mayor viento, menor velocidad promedio. 2021 se destaca como el año con mejor desempeño.
@@ -89,7 +94,7 @@ El cuadro más intenso del heatmap es el domingo a las 12 hs: 25 salidas concent
 
 ---
 
-## Herramientas utilizadas
+## 📊 Herramientas utilizadas
 
 | Herramienta | Uso |
 |---|---|
@@ -102,3 +107,13 @@ El cuadro más intenso del heatmap es el domingo a las 12 hs: 25 salidas concent
 
 ---
 
+## 📅 Entregas
+
+| Fecha | Entrega |
+|---|---|
+| 2026-03-20 | Prototipo navegable en GitHub Pages |
+| 2026-03-28 | Versión final + presentación oral (10 min) |
+
+---
+
+*Datos exportados de Strava · Proyecto individual · ECD 2025*

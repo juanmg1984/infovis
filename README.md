@@ -1,88 +1,75 @@
-# 🚴 Cycling Dashboard · Strava Stats
+🚴 Dos ruedas, muchos datos
+Exploración visual de 266 salidas en bicicleta registradas en Strava entre 2016 y 2024. El proyecto toma datos personales exportados de una app de actividad física y los transforma en cuatro visualizaciones que cuentan una historia: hábitos, evolución, clima y el paso del tiempo.
 
-Dashboard estático con estadísticas personales de ciclismo exportadas desde Strava, construido en HTML/CSS/JS puro — sin dependencias de servidor ni frameworks.
-
-🔗 **[Ver dashboard en vivo](https://TU-USUARIO.github.io/TU-REPO/cycling-dashboard.html)**
-
----
-
-## 📸 Vista general
-
-El dashboard incluye:
-- **KPIs globales** — distancia total, salidas, horas y desnivel acumulado
-- **Tabla + gráfico anual** — comparativa por año con métricas intercambiables (distancia, salidas, horas)
-- **Heatmap mensual** — intensidad de actividad mes a mes a lo largo de los años
-- **Velocidad promedio por año** — filtrada a salidas ≥ 14 km/h para excluir pausas
-- **Récords personales** — ride más largo, más veloz, mayor desnivel y más horas en ruta
-- **Widget de Strava** — últimas salidas en tiempo real
-
----
-
-## 📁 Estructura del repositorio
-
-```
+📁 Archivos del proyecto
 /
-├── index.html                  # página principal (existente)
-├── cycling-dashboard.html      # dashboard de ciclismo ← este proyecto
-├── cycling_data.json           # datos transformados y limpios
-└── README.md
-```
+├── index_tp.html                     # Página principal del proyecto
+├── README.md                         # Este archivo
+│
+├── datos/
+│   ├── activities.csv                # Export original de Strava (no incluido por privacidad)
+│   ├── datawrapper_vel_multiples.csv # Datos para DataWrapper
+│   ├── raw_rawgraphs_beeswarm.csv    # Datos para RAWGraphs
+│   ├── flourish_scatter.csv          # Datos para Flourish
+│   └── tableau_heatmap.csv           # Datos para Tableau
+│
+└── beeswarm_final.svg                # Visualización RAWGraphs exportada y editada
+De dónde vienen los datos
+Strava permite exportar el historial completo de actividades desde Configuración → Mi cuenta → Descargar datos. El archivo descargado es un .zip que contiene, entre otras cosas, un archivo llamado activities.csv con una fila por cada actividad registrada.
 
----
+Ese archivo fue el punto de partida de todo el proyecto. Contiene información como la fecha de cada salida, la distancia recorrida, la duración, la velocidad promedio y máxima, el desnivel, las calorías y —en algunos registros más recientes— datos climáticos capturados automáticamente por la app klimat.app al momento de la salida: temperatura, velocidad del viento, ráfagas y condición del cielo.
 
-## 🗂 Datos (`cycling_data.json`)
+Cómo transformamos los datos para cada visualización
+1 · DataWrapper — ¿En qué meses pedaleo más?
+El archivo original tiene una fila por salida con su fecha exacta. Para este gráfico necesitábamos ver el tiempo total por mes, agrupado por año, de forma que cada año fuera una columna independiente.
 
-Los datos originales vienen del **export de Strava** (`activities.csv`) y fueron transformados con Python/pandas. El JSON contiene:
+El proceso fue:
 
-| Campo | Descripción |
-|---|---|
-| `totals` | Totales globales: distancia, salidas, horas, desnivel, calorías |
-| `records` | 4 récords personales con detalle de cada salida |
-| `by_year` | Resumen anual agregado (8 años: 2016–2024) |
-| `by_month` | Distancia y cantidad de salidas por mes/año (51 registros) |
+Convertir la fecha (que venía en formato de texto en español, como "26 ago 2020") a un formato numérico legible
+Sumar todas las horas de cada mes para cada año
+Reorganizar la tabla: en lugar de una fila por salida, una fila por mes (Ene a Dic) y una columna por año (2016, 2017, 2018, 2020, 2021, 2022, 2023, 2024)
+Los meses sin actividad quedaron vacíos — en el gráfico eso se ve como la ausencia de barra, que también cuenta la historia
+El resultado es una tabla de 12 filas × 9 columnas que DataWrapper puede leer directamente para armar el gráfico de columnas múltiples.
 
-> **Nota:** `vel_avg_filtered` en `by_year` excluye salidas con velocidad promedio < 14 km/h, que generalmente corresponden a salidas cortas, virtuales o con muchas pausas no descontadas.
+2 · RAWGraphs — ¿Qué tan lejos fui según el día de la semana?
+Para el beeswarm necesitábamos una fila por salida con varias dimensiones: cuándo fue, qué día de la semana, cuánto recorrí y a qué ritmo.
 
----
+El proceso fue:
 
-## 🛠 Cómo actualizar los datos
+Filtrar y eliminar las salidas con menos de 1 km (registros erróneos o pruebas del dispositivo)
+Convertir las fechas al formato YYYY-MM que RAWGraphs requiere para el eje temporal
+Traducir los días de la semana al español (lunes, martes, etc.) para que el gráfico se leyera correctamente
+Calcular la velocidad promedio en km/h (el original viene en m/s)
+Crear una columna de categoría de velocidad con cuatro niveles: Lenta, Normal, Rápida y Muy rápida, según umbrales definidos a partir de la distribución real de los datos
+La visualización se exportó desde RAWGraphs como SVG y luego se editó manualmente en Inkscape para agregar el título, las anotaciones narrativas (el gap de 2018–2019, la pandemia de 2020, el robo de 2024) y adaptar la paleta de colores al estilo visual del proyecto.
 
-1. Exportá tus datos desde **Strava → Configuración → Mi cuenta → Descargar datos**
-2. Extraé `activities.csv` del `.zip`
-3. Corré el script de transformación:
+3 · Flourish — ¿El viento me frena?
+Este gráfico explora la relación entre el viento y la velocidad. Los datos climáticos estaban disponibles en las salidas capturadas por klimat.app, identificadas a partir de los títulos de los rides y la presencia de datos en las columnas de clima del CSV.
 
-```bash
-python3 transform.py activities.csv
-```
+El proceso fue:
 
-4. Reemplazá `cycling_data.json` y commiteá
+Filtrar únicamente las salidas que tenían datos de viento registrados
+Aplicar el mismo filtro de calidad que en el beeswarm: solo salidas con más de 1 km y velocidad promedio mayor a 14 km/h (para excluir registros donde el GPS no descontó las pausas)
+Agregar una columna con el año de cada salida, para poder colorear los puntos por año en Flourish
+El resultado fue un scatter donde cada punto es una salida, el eje X muestra el viento y el eje Y la velocidad
+La correlación entre viento y velocidad resultó ser de -0.66: a mayor viento, menor velocidad promedio. 2021 se destaca como el año con mejor desempeño.
 
----
+4 · Tableau — ¿Cuándo salgo a rodar?
+Para el heatmap de día × hora necesitábamos saber exactamente a qué hora del día se realizó cada salida.
 
-## 🔧 Tecnologías
+El proceso fue:
 
-- **HTML / CSS / JavaScript** puro — sin frameworks
-- **[Chart.js 4.4](https://www.chartjs.org/)** — gráficos de barras y línea
-- **Google Fonts** — Bebas Neue + DM Sans + DM Mono
-- **Python + pandas** — transformación de datos offline
+Extraer la hora de inicio de cada actividad (que venía incluida en el campo de fecha del CSV)
+Traducir los días de la semana al español y asignarles un orden lógico (lunes a domingo)
+Agrupar las salidas por combinación de día de la semana + hora, sumando la cantidad de rides y calculando la distancia promedio y total para cada celda
+El resultado es una tabla donde cada fila es una combinación única de día y hora, con la información necesaria para colorear el heatmap
+El cuadro más intenso del heatmap es el domingo a las 12 hs: 25 salidas concentradas en ese momento, con las distancias promedio más largas del registro.
 
----
-
-## 📊 Highlights (2016–2024)
-
-| Métrica | Valor |
-|---|---|
-| Distancia total | **3.957 km** |
-| Salidas totales | **266** |
-| Horas en ruta | **353 h** |
-| Desnivel acumulado | **12.497 m** |
-| Año más activo | **2021** (120 salidas · 1.534 km) |
-| Ride más largo | **90.4 km** — 2 mayo 2021 |
-| Mayor desnivel | **709 m** — 21 dic 2020 |
-| Velocidad pico | **30.6 km/h** prom. — 20 feb 2022 |
-
----
-
-## 📄 Licencia
-
-Datos personales — uso privado.
+Herramientas utilizadas
+Herramienta	Uso
+Python + pandas	Transformación y limpieza de datos
+RAWGraphs	Beeswarm plot
+Inkscape	Edición y anotaciones del SVG
+DataWrapper	Gráfico de columnas múltiples
+Flourish	Scatter plot con regresión
+Tableau Public	Heatmap interactivo

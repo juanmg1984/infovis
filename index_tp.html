@@ -28,8 +28,33 @@
   header {
     background: var(--dark);
     color: #fff;
-    padding: 52px 0 0;
+    padding: 0;
     text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header-banner {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    object-position: center 40%;
+    display: block;
+    opacity: 0.55;
+  }
+  .header-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 24px;
+    background: linear-gradient(
+      to bottom,
+      rgba(10,10,10,0.15) 0%,
+      rgba(10,10,10,0.55) 40%,
+      rgba(10,10,10,0.72) 100%
+    );
   }
   header p.subtitle {
     font-size: 11px;
@@ -208,18 +233,43 @@
   /* FOTOS */
   .photos-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
   }
-  .photo-placeholder {
-    aspect-ratio: 4/3;
-    background: var(--border);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 28px;
-    color: #c0bdb8;
+  .photo-item {
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    background: var(--dark);
+  }
+  .photo-item img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    display: block;
+    transition: transform .4s ease, opacity .4s ease;
+    opacity: .92;
+  }
+  .photo-item:hover img {
+    transform: scale(1.03);
+    opacity: 1;
+  }
+  .photo-caption {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 10px 14px;
+    background: linear-gradient(to top, rgba(0,0,0,0.72), transparent);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 300;
+    letter-spacing: .5px;
+  }
+  .photo-caption strong {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--orange);
+    margin-bottom: 2px;
   }
 
   /* STRAVA FINAL */
@@ -262,7 +312,8 @@
 
 <!-- ══ HEADER ══ -->
 <header>
-  <div class="wrap">
+  <img class="header-banner" src="banner.jpg" alt="Bicicleta en ruta pampeana">
+  <div class="header-content">
     <p class="subtitle">ECD · 2025 · Visualización de Datos Personales</p>
     <h1>Dos ruedas,<br>muchos datos</h1>
     <p class="intro">Una exploración visual de 266 salidas en bicicleta registradas en Strava entre 2016 y 2024. Distancias, velocidades, hábitos y clima contados a través de datos propios.</p>
@@ -307,7 +358,7 @@
     </p>
     <div class="viz-card">
       <span class="tool-tag">DataWrapper</span>
-      <iframe title="Tiempo acumulado mensual de salidas ciclistas" aria-label="Columnas múltiples" id="datawrapper-chart-3cPms" src="https://www.datawrapper.de/_/3cPms/?v=2" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="521" data-external="1"></iframe>
+      <iframe title="Tiempo acumulado mensual de salidas ciclistas" aria-label="Columnas múltiples" id="datawrapper-chart-3cPms" src="https://datawrapper.dwcdn.net/3cPms/2/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="521" data-external="1"></iframe>
       <script type="text/javascript">window.addEventListener("message",function(a){if(void 0!==a.data["datawrapper-height"]){var e=document.querySelectorAll("iframe");for(var t in a.data["datawrapper-height"])for(var r,i=0;r=e[i];i++)if(r.contentWindow===a.source){var d=a.data["datawrapper-height"][t]+"px";r.style.height=d}}});</script>
     </div>
   </div>
@@ -4313,9 +4364,34 @@
     <h2 class="section-question">Momentos en ruta</h2>
     <p class="section-body">Algunas de las salidas detrás de los datos.</p>
     <div class="photos-grid">
-      <div class="photo-placeholder">🚴</div>
-      <div class="photo-placeholder">🚴</div>
-      <div class="photo-placeholder">🚴</div>
+      <div class="photo-item">
+        <img src="foto1_empalme_lobos.jpg" alt="Empalme Lobos">
+        <div class="photo-caption">
+          <strong>Empalme Lobos, 2021</strong>
+          Estación abandonada — ride de 90 km, el más largo del registro
+        </div>
+      </div>
+      <div class="photo-item">
+        <img src="foto2_villa_ruiz.jpg" alt="Villa Ruiz">
+        <div class="photo-caption">
+          <strong>Villa Ruiz, 2016</strong>
+          Pueblo turístico bonaerense — primeros años de registro en Strava
+        </div>
+      </div>
+      <div class="photo-item">
+        <img src="foto3_los_durmientes.jpg" alt="Los Durmientes">
+        <div class="photo-caption">
+          <strong>Los Durmientes, 2019</strong>
+          Salida grupal durante el gap de datos — el GPS no registró, los recuerdos sí
+        </div>
+      </div>
+      <div class="photo-item">
+        <img src="foto4_villars.jpg" alt="Villars">
+        <div class="photo-caption">
+          <strong>Villars, 2019</strong>
+          Estación histórica del ramal ferroviario — salida con amigos
+        </div>
+      </div>
     </div>
   </div>
 </section>

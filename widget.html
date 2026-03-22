@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data360 Embed</title>
+  <script src="https://cdn.jsdelivr.net/npm/vega@5/build/vega.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5/build/vega-lite.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6/build/vega-embed.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #ffffff;
+      --fg: #1e293b;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --accent: #0e9aa7;
+      --orange: #f4845f;
+      --radius: 8px;
+      --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--fg);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 16px 20px 8px;
+    }
+
+    /* ── TITLE ── */
+    #chart-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--fg);
+      margin-bottom: 4px;
+      line-height: 1.3;
+    }
+    #chart-subtitle {
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    /* ── CHART ── */
+    #chart {
+      flex: 1;
+      min-height: 260px;
+    }
+    #chart .vega-embed { width: 100% !important; }
+    #chart .vega-embed canvas,
+    #chart .vega-embed svg { width: 100% !important; }
+
+    /* ── LOADING ── */
+    #loading {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 60px 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .spinner {
+      width: 32px; height: 32px;
+      border: 3px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── ERROR ── */
+    #error {
+      display: none;
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-radius: var(--radius);
+      padding: 16px;
+      color: #991b1b;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    #error strong { display: block; margin-bottom: 4px; }
+
+    /* ── FOOTER ── */
+    footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 0 4px;
+      border-top: 1px solid var(--border);
+      margin-top: 10px;
+      gap: 8px;
+    }
+    footer .source {
+      font-size: 10px;
+      color: var(--muted);
+    }
+    footer .source a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    footer .badge {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: var(--bg);
+      background: var(--accent);
+      padding: 2px 7px;
+      border-radius: 99px;
+      white-space: nowrap;
+    }
+
+    /* ── DARK THEME ── */
+    body.dark {
+      --bg: #0f172a;
+      --fg: #f1f5f9;
+      --muted: #94a3b8;
+      --border: #1e293b;
+    }
+  </style>
+</head>
+<body>
+<div id="wrapper">
+  <div id="chart-title"></div>
+  <div id="chart-subtitle"></div>
+
+  <div id="loading">
+    <div class="spinner"></div>
+    <span>Cargando datos del Banco Mundial…</span>
+  </div>
+
+  <div id="error"></div>
+  <div id="chart"></div>
+
+  <footer>
+    <span class="source">
+      Fuente: <a href="https://data360.worldbank.org" target="_blank" rel="noopener">
+        World Bank Data360
+      </a> &nbsp;·&nbsp; <span id="footer-indicator"></span>
+    </span>
+    <span class="badge">Data360 Embed</span>
+  </footer>
+</div>
+
+<script>
+// ─────────────────────────────────────────────
+//  COUNTRY NAMES (compact ISO3 → name map)
+// ─────────────────────────────────────────────
+const NAMES = {
+  ARG:'Argentina',BRA:'Brasil',CHL:'Chile',COL:'Colombia',MEX:'México',
+  PER:'Perú',URY:'Uruguay',PRY:'Paraguay',BOL:'Bolivia',ECU:'Ecuador',
+  VEN:'Venezuela',PAN:'Panamá',CRI:'Costa Rica',GTM:'Guatemala',
+  HND:'Honduras',SLV:'El Salvador',NIC:'Nicaragua',CUB:'Cuba',
+  DOM:'Rep. Dominicana',JAM:'Jamaica',HTI:'Haití',TTO:'Trinidad y Tobago',
+  USA:'EE.UU.',CAN:'Canadá',GBR:'Reino Unido',DEU:'Alemania',
+  FRA:'Francia',ESP:'España',ITA:'Italia',PRT:'Portugal',
+  CHN:'China',JPN:'Japón',IND:'India',KOR:'Corea del Sur',
+  AUS:'Australia',ZAF:'Sudáfrica',NGA:'Nigeria',EGY:'Egipto',
+  RUS:'Rusia',TUR:'Turquía',SAU:'Arabia Saudita',IRN:'Irán',
+  WLD:'Mundo',LAC:'Latinoamérica y Caribe',SSF:'África Sub-Sahariana',
+  EAS:'Asia Oriental',SAS:'Asia Meridional',MNA:'Medio Oriente y N. África',
+  EUU:'Unión Europea',OED:'OCDE',
+};
+
+function nameOf(code) { return NAMES[code] || code; }
+
+// ─────────────────────────────────────────────
+//  PARSE URL PARAMS
+// ─────────────────────────────────────────────
+const P = new URLSearchParams(window.location.search);
+
+const CHART     = P.get('chart')      || 'line';
+const DB        = P.get('db')         || 'WB_WDI';
+const IND1      = P.get('indicator')  || 'WB_WDI_SP_POP_TOTL';
+const IND2      = P.get('indicator2') || null;
+const AREAS     = (P.get('areas')     || 'ARG,BRA,CHL').split(',').filter(Boolean);
+const START     = parseInt(P.get('start') || '2000');
+const END       = parseInt(P.get('end')   || '2023');
+const YEAR      = parseInt(P.get('year')  || '2022');
+const TITLE     = P.get('title')     || '';
+const IND1_LABEL = decodeURIComponent(P.get('ind1label') || IND1);
+const IND2_LABEL = decodeURIComponent(P.get('ind2label') || (IND2 || ''));
+const PROXY     = (P.get('proxy')    || 'https://wbd360.onrender.com').replace(/\/$/, '');
+const THEME     = P.get('theme')     || 'light';
+
+if (THEME === 'dark') document.body.classList.add('dark');
+
+// ─────────────────────────────────────────────
+//  UI HELPERS
+// ─────────────────────────────────────────────
+function showError(msg) {
+  document.getElementById('loading').style.display = 'none';
+  document.getElementById('chart').style.display = 'none';
+  const el = document.getElementById('error');
+  el.style.display = 'block';
+  el.innerHTML = `<strong>No se pudieron cargar los datos</strong>${msg}`;
+}
+
+function hideLoading() {
+  document.getElementById('loading').style.display = 'none';
+  document.getElementById('chart').style.display = 'block';
+}
+
+// ─────────────────────────────────────────────
+//  API FETCH
+// ─────────────────────────────────────────────
+function buildApiUrl(indicator, yearsArray) {
+  const base = PROXY
+    ? `${PROXY}/data360/data`
+    : 'https://data360api.worldbank.org/data360/data';
+  const q = new URLSearchParams({
+    DATABASE_ID: DB,
+    INDICATOR:   indicator,
+    REF_AREA:    AREAS.join(','),
+  });
+  if (yearsArray && yearsArray.length) {
+    q.set('TIME_PERIOD', yearsArray.join(','));
+  }
+  return `${base}?${q}`;
+}
+
+async function fetchIndicator(indicator, yearsArray) {
+  const url = buildApiUrl(indicator, yearsArray);
+  let resp;
+  try {
+    resp = await fetch(url);
+  } catch(e) {
+    // Likely CORS — suggest proxy
+    throw new Error(
+      `<br>Error de red (posible CORS). Si estás usando el widget sin un proxy configurado, ` +
+      `desplegá <code>proxy.py</code> en Render y agregá <code>&amp;proxy=https://tu-proxy.onrender.com</code> a la URL del widget.`
+    );
+  }
+  if (!resp.ok) throw new Error(`<br>La API respondió con error ${resp.status}.`);
+  const json = await resp.json();
+  return (json.value || []).map(v => ({
+    area:    v.REF_AREA,
+    name:    nameOf(v.REF_AREA),
+    year:    parseInt(v.TIME_PERIOD),
+    value:   parseFloat(v.OBS_VALUE),
+  })).filter(d => !isNaN(d.value) && !isNaN(d.year));
+}
+
+// ─────────────────────────────────────────────
+//  VEGA-LITE SPECS
+// ─────────────────────────────────────────────
+
+// Journalism-friendly color scheme
+const COLORS = [
+  '#0e9aa7','#f4845f','#1b2a4a','#10b981',
+  '#f59e0b','#6d28d9','#ec4899','#0ea5e9'
+];
+
+const VEGA_THEME = {
+  background: THEME === 'dark' ? '#0f172a' : '#ffffff',
+  axis: {
+    domainColor:    THEME === 'dark' ? '#334155' : '#e2e8f0',
+    gridColor:      THEME === 'dark' ? '#1e293b' : '#f1f5f9',
+    tickColor:      THEME === 'dark' ? '#334155' : '#e2e8f0',
+    labelColor:     THEME === 'dark' ? '#94a3b8' : '#64748b',
+    titleColor:     THEME === 'dark' ? '#94a3b8' : '#64748b',
+    labelFontSize:  11,
+    titleFontSize:  11,
+  },
+  legend: {
+    labelColor:     THEME === 'dark' ? '#94a3b8' : '#64748b',
+    titleColor:     THEME === 'dark' ? '#94a3b8' : '#64748b',
+    labelFontSize:  11,
+  },
+};
+
+function vegaConfig() {
+  return {
+    background: VEGA_THEME.background,
+    axis:       VEGA_THEME.axis,
+    legend:     VEGA_THEME.legend,
+    view:       { stroke: 'transparent' },
+  };
+}
+
+// ── LINE CHART ──
+function specLine(data) {
+  return {
+    $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
+    config:  vegaConfig(),
+    width:   'container',
+    height:  270,
+    data:    { values: data },
+    mark:    { type: 'line', point: { filled: true, size: 45 }, strokeWidth: 2.5 },
+    encoding: {
+      x: {
+        field: 'year', type: 'ordinal',
+        axis:  { labelAngle: -45, title: null, labelFontSize: 11 },
+      },
+      y: {
+        field: 'value', type: 'quantitative',
+        axis:  { title: IND1_LABEL, labelFontSize: 11, format: '~s', titleFontSize: 11 },
+      },
+      color: {
+        field: 'name', type: 'nominal', title: null,
+        scale: { range: COLORS },
+        legend: { orient: 'bottom', columns: 4, labelFontSize: 11 },
+      },
+      tooltip: [
+        { field: 'name',  title: 'País / Área' },
+        { field: 'year',  title: 'Año' },
+        { field: 'value', title: IND1_LABEL, format: ',.2~f' },
+      ],
+    },
+  };
+}
+
+// ── BAR CHART ──
+function specBar(data) {
+  // Sort by value descending
+  data = [...data].sort((a, b) => b.value - a.value);
+  return {
+    $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
+    config:  vegaConfig(),
+    width:   'container',
+    height:  Math.max(200, data.length * 36),
+    data:    { values: data },
+    mark:    { type: 'bar', cornerRadiusEnd: 4 },
+    encoding: {
+      y: {
+        field: 'name', type: 'nominal',
+        sort:  { field: 'value', order: 'descending' },
+        axis:  { title: null, labelFontSize: 12 },
+      },
+      x: {
+        field: 'value', type: 'quantitative',
+        axis:  { title: IND1_LABEL, labelFontSize: 11, format: '~s' },
+      },
+      color: {
+        field: 'name', type: 'nominal',
+        scale: { range: COLORS },
+        legend: null,
+      },
+      tooltip: [
+        { field: 'name',  title: 'País / Área' },
+        { field: 'value', title: IND1_LABEL, format: ',.2~f' },
+        { field: 'year',  title: 'Año' },
+      ],
+    },
+  };
+}
+
+// ── SCATTER CHART ──
+function specScatter(merged) {
+  return {
+    $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
+    config:  vegaConfig(),
+    width:   'container',
+    height:  280,
+    data:    { values: merged },
+    layer: [
+      {
+        mark: { type: 'circle', opacity: 0.75, stroke: 'white', strokeWidth: 1 },
+        encoding: {
+          x: {
+            field: 'vx', type: 'quantitative',
+            axis:  { title: IND1_LABEL, labelFontSize: 11, format: '~s' },
+          },
+          y: {
+            field: 'vy', type: 'quantitative',
+            axis:  { title: IND2_LABEL, labelFontSize: 11, format: '~s' },
+          },
+          size: { value: 90 },
+          color: {
+            field: 'name', type: 'nominal', title: null,
+            scale: { range: COLORS },
+            legend: { orient: 'bottom', columns: 4, labelFontSize: 10 },
+          },
+          tooltip: [
+            { field: 'name', title: 'País / Área' },
+            { field: 'vx',   title: IND1_LABEL, format: ',.2~f' },
+            { field: 'vy',   title: IND2_LABEL, format: ',.2~f' },
+          ],
+        },
+      },
+      {
+        mark: {
+          type: 'text', align: 'left', baseline: 'bottom',
+          dx: 6, dy: -4, fontSize: 10,
+          color: THEME === 'dark' ? '#94a3b8' : '#64748b',
+        },
+        encoding: {
+          x:    { field: 'vx', type: 'quantitative' },
+          y:    { field: 'vy', type: 'quantitative' },
+          text: { field: 'area', type: 'nominal' },
+        },
+      },
+    ],
+  };
+}
+
+// ─────────────────────────────────────────────
+//  MAIN
+// ─────────────────────────────────────────────
+async function main() {
+  // Set title
+  const titleEl = document.getElementById('chart-title');
+  const subEl   = document.getElementById('chart-subtitle');
+  const footerInd = document.getElementById('footer-indicator');
+
+  if (TITLE) {
+    titleEl.textContent = TITLE;
+  } else {
+    titleEl.textContent = IND1_LABEL;
+  }
+  footerInd.textContent = IND1_LABEL;
+
+  // Year range label
+  if (CHART === 'line') {
+    subEl.textContent = `${nameOf(AREAS[0])}${AREAS.length > 1 ? ` y ${AREAS.length - 1} más` : ''} · ${START}–${END}`;
+  } else {
+    subEl.textContent = `Año ${YEAR} · ${AREAS.length} países / regiones`;
+  }
+
+  try {
+    let spec;
+
+    if (CHART === 'scatter') {
+      if (!IND2) throw new Error('<br>Para el gráfico de dispersión necesitás <code>indicator2</code> en la URL.');
+      const [d1, d2] = await Promise.all([
+        fetchIndicator(IND1, [YEAR]),
+        fetchIndicator(IND2, [YEAR]),
+      ]);
+      const map1 = Object.fromEntries(d1.map(r => [r.area, r.value]));
+      const map2 = Object.fromEntries(d2.map(r => [r.area, r.value]));
+      const merged = AREAS
+        .filter(a => map1[a] != null && map2[a] != null)
+        .map(a => ({ area: a, name: nameOf(a), vx: map1[a], vy: map2[a] }));
+      if (!merged.length) throw new Error('<br>No hay datos para los países / año seleccionados.');
+      spec = specScatter(merged);
+
+    } else if (CHART === 'bar') {
+      const rows = await fetchIndicator(IND1, [YEAR]);
+      if (!rows.length) throw new Error('<br>No hay datos para el año seleccionado.');
+      // Keep only one value per area (closest to requested year)
+      const best = {};
+      rows.forEach(r => {
+        if (!best[r.area] || Math.abs(r.year - YEAR) < Math.abs(best[r.area].year - YEAR)) best[r.area] = r;
+      });
+      spec = specBar(Object.values(best));
+
+    } else {
+      // LINE (default)
+      const years = Array.from({ length: END - START + 1 }, (_, i) => START + i);
+      const rows  = await fetchIndicator(IND1, years);
+      if (!rows.length) throw new Error('<br>No hay datos para el rango de años seleccionado.');
+      spec = specLine(rows);
+    }
+
+    hideLoading();
+    await vegaEmbed('#chart', spec, {
+      actions: false,
+      renderer: 'svg',
+      tooltip: { theme: THEME === 'dark' ? 'dark' : 'light' },
+    });
+
+  } catch(err) {
+    showError(err.message || String(err));
+  }
+}
+
+main();
+</script>
+</body>
+</html>

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data360 Embed — Configurador</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:#1b2a4a; --teal:#0e9aa7; --orange:#f4845f; --green:#10b981;
+      --bg:#f0f4f8; --card:#ffffff; --border:#e2e8f0; --fg:#1e293b; --muted:#64748b;
+      --radius:10px; --font:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    }
+    body { font-family:var(--font); background:var(--bg); color:var(--fg); min-height:100vh; }
+    header { background:var(--navy); padding:0 32px; display:flex; align-items:center; justify-content:space-between; height:58px; gap:16px; }
+    .logo { display:flex; align-items:center; gap:10px; }
+    .logo-mark { width:30px; height:30px; background:var(--teal); border-radius:6px; display:flex; align-items:center; justify-content:center; font-weight:900; font-size:14px; color:#fff; }
+    .logo-text { font-weight:700; font-size:16px; color:#fff; }
+    .logo-text span { color:var(--teal); }
+    .header-badge { font-size:10px; font-weight:700; letter-spacing:.5px; color:var(--orange); border:1px solid var(--orange); padding:2px 8px; border-radius:99px; }
+    .container { max-width:1200px; margin:0 auto; padding:28px 24px; display:grid; grid-template-columns:480px 1fr; gap:24px; align-items:start; }
+    @media(max-width:900px){ .container{ grid-template-columns:1fr; } }
+    .card { background:var(--card); border-radius:var(--radius); border:1px solid var(--border); overflow:hidden; }
+    .card-header { padding:14px 20px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:10px; }
+    .card-header h2 { font-size:14px; font-weight:700; color:var(--fg); }
+    .step-badge { width:24px; height:24px; background:var(--teal); color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; flex-shrink:0; }
+    .card-body { padding:20px; }
+    label { display:block; font-size:12px; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:.5px; margin-bottom:6px; }
+    select, input[type=text] { width:100%; padding:9px 30px 9px 12px; border:1.5px solid var(--border); border-radius:7px; font-size:13px; font-family:var(--font); color:var(--fg); background:#fff; appearance:none; -webkit-appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7' viewBox='0 0 12 7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2364748b' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 10px center; transition:border-color .15s; }
+    select:focus, input:focus { outline:none; border-color:var(--teal); }
+    .form-group { margin-bottom:16px; }
+    .form-group:last-child { margin-bottom:0; }
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .chart-types { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+    .ctype-btn { border:2px solid var(--border); border-radius:8px; padding:12px 8px; cursor:pointer; background:#fff; text-align:center; transition:all .15s; font-family:var(--font); }
+    .ctype-btn:hover { border-color:var(--teal); }
+    .ctype-btn.active { border-color:var(--teal); background:#e0f7fa; }
+    .ctype-btn .icon { font-size:22px; margin-bottom:4px; }
+    .ctype-btn .lbl { font-size:11px; font-weight:600; color:var(--fg); }
+    .ctype-btn .dsc { font-size:10px; color:var(--muted); margin-top:2px; }
+    .csearch { margin-bottom:10px; width:100%; padding:8px 12px; border:1.5px solid var(--border); border-radius:7px; font-size:13px; font-family:var(--font); }
+    .csearch:focus { outline:none; border-color:var(--teal); }
+    .cgrid { display:grid; grid-template-columns:repeat(2,1fr); gap:3px; max-height:220px; overflow-y:auto; padding-right:4px; }
+    .cgrid::-webkit-scrollbar { width:5px; }
+    .cgrid::-webkit-scrollbar-thumb { background:var(--border); border-radius:4px; }
+    .citem { display:flex; align-items:center; gap:6px; padding:6px 8px; border-radius:5px; cursor:pointer; font-size:12px; user-select:none; }
+    .citem:hover { background:var(--bg); }
+    .citem input[type=checkbox] { width:14px; height:14px; accent-color:var(--teal); cursor:pointer; margin:0; flex-shrink:0; appearance:auto; -webkit-appearance:auto; background-image:none; padding:0; border:none; }
+    .citem .code { font-size:10px; color:var(--muted); font-weight:600; }
+    .selcount { font-size:11px; color:var(--teal); font-weight:600; margin-top:6px; }
+    #scatter-opts { display:none; }
+    details { margin-top:16px; }
+    summary { cursor:pointer; font-size:12px; font-weight:600; color:var(--muted); list-style:none; display:flex; align-items:center; gap:6px; }
+    summary::before { content:'▶'; font-size:9px; transition:transform .2s; }
+    details[open] summary::before { transform:rotate(90deg); }
+    .advbody { margin-top:12px; padding:12px; background:var(--bg); border-radius:7px; font-size:11px; color:var(--muted); line-height:1.5; }
+    .preview-panel .card-header { background:var(--navy); }
+    .preview-panel .card-header h2 { color:#fff; }
+    .preview-panel .step-badge { background:var(--orange); }
+    #pframe { width:100%; height:440px; border:none; display:none; }
+    #pph { display:flex; flex-direction:column; align-items:center; justify-content:center; height:440px; color:var(--muted); font-size:13px; gap:10px; }
+    #pph .bigicon { font-size:40px; }
+    .embed-card { margin-top:20px; }
+    .embed-card .card-header { background:#f0fdf4; }
+    .embed-card .card-header h2 { color:#166534; }
+    .embed-card .step-badge { background:var(--green); }
+    #ecw { padding:16px 20px; }
+    .elabel { font-size:12px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.5px; margin-bottom:8px; }
+    #ecode { font-family:'Courier New',monospace; font-size:12px; background:#1e293b; color:#7dd3fc; padding:14px 16px; border-radius:7px; white-space:pre-wrap; word-break:break-all; line-height:1.6; border:none; resize:none; width:100%; }
+    .eactions { display:flex; gap:10px; margin-top:12px; flex-wrap:wrap; align-items:center; }
+    .btn { display:inline-flex; align-items:center; gap:6px; padding:9px 18px; border-radius:7px; font-size:13px; font-weight:600; font-family:var(--font); cursor:pointer; border:none; transition:all .15s; }
+    .btn-teal { background:var(--teal); color:#fff; }
+    .btn-teal:hover { background:#0c8a96; }
+    .btn-gray { background:var(--bg); color:var(--fg); border:1.5px solid var(--border); }
+    .btn-gray:hover { background:#e2e8f0; }
+    .btn-orange { background:var(--orange); color:#fff; }
+    .btn-orange:hover { background:#e0724f; }
+    .copied { font-size:12px; color:var(--green); font-weight:600; display:none; align-items:center; gap:4px; }
+    #btn-upd { width:100%; margin-top:4px; padding:11px; font-size:14px; }
+    .tips { margin-top:14px; padding:12px 14px; background:#eff6ff; border-left:3px solid #3b82f6; border-radius:0 6px 6px 0; font-size:11px; color:#1e40af; line-height:1.6; }
+    .pfooter { text-align:center; padding:20px; font-size:11px; color:var(--muted); }
+    .pfooter a { color:var(--teal); text-decoration:none; }
+  </style>
+</head>
+<body>
+<header>
+  <div class="logo">
+    <div class="logo-mark">D3</div>
+    <div class="logo-text">Data360 <span>Embed</span></div>
+  </div>
+  <div class="header-badge">Media Party · Categoría 02</div>
+</header>
+
+<div class="container">
+  <div>
+    <!-- STEP 1: INDICATOR -->
+    <div class="card" style="margin-bottom:16px">
+      <div class="card-header"><div class="step-badge">1</div><h2>Indicador del Banco Mundial</h2></div>
+      <div class="card-body">
+        <div class="form-group">
+          <label>Tema</label>
+          <select id="stopic" onchange="filterInds()">
+            <option value="">— Todos los temas —</option>
+            <option value="economy">Economía</option>
+            <option value="social">Social</option>
+            <option value="health">Salud</option>
+            <option value="education">Educación</option>
+            <option value="environment">Medio Ambiente</option>
+            <option value="digital">Digital / Conectividad</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Indicador</label><select id="sind1"></select></div>
+        <div id="scatter-opts" class="form-group"><label>Segundo indicador (eje Y)</label><select id="sind2"></select></div>
+      </div>
+    </div>
+
+    <!-- STEP 2: COUNTRIES -->
+    <div class="card" style="margin-bottom:16px">
+      <div class="card-header"><div class="step-badge">2</div><h2>Países / Regiones</h2></div>
+      <div class="card-body">
+        <input type="text" class="csearch" id="csearch" placeholder="🔍  Buscar país..." oninput="filterC()" />
+        <div class="cgrid" id="cgrid"></div>
+        <div class="selcount" id="selcount">0 seleccionados</div>
+      </div>
+    </div>
+
+    <!-- STEP 3: CHART + PERIOD -->
+    <div class="card" style="margin-bottom:16px">
+      <div class="card-header"><div class="step-badge">3</div><h2>Tipo de gráfico y período</h2></div>
+      <div class="card-body">
+        <div class="form-group">
+          <label>Tipo de gráfico</label>
+          <div class="chart-types">
+            <div class="ctype-btn active" onclick="selChart('line',this)">
+              <div class="icon">📈</div><div class="lbl">Línea</div><div class="dsc">Serie temporal</div>
+            </div>
+            <div class="ctype-btn" onclick="selChart('bar',this)">
+              <div class="icon">📊</div><div class="lbl">Barras</div><div class="dsc">Comparación</div>
+            </div>
+            <div class="ctype-btn" onclick="selChart('scatter',this)">
+              <div class="icon">🔵</div><div class="lbl">Dispersión</div><div class="dsc">Correlación</div>
+            </div>
+          </div>
+        </div>
+        <div id="pline">
+          <div class="form-row">
+            <div class="form-group"><label>Año inicio</label><select id="sstart"></select></div>
+            <div class="form-group"><label>Año fin</label><select id="send"></select></div>
+          </div>
+        </div>
+        <div id="pyear" style="display:none">
+          <div class="form-group"><label>Año</label><select id="syear"></select></div>
+        </div>
+        <div class="form-group">
+          <label>Título (opcional)</label>
+          <input type="text" id="ititle" placeholder="Ej: Evolución del PIB per cápita en América Latina" />
+        </div>
+        <div class="form-group">
+          <label>Tema visual</label>
+          <select id="stheme"><option value="light">☀️ Claro</option><option value="dark">🌙 Oscuro</option></select>
+        </div>
+        <details>
+          <summary>Configuración avanzada (proxy CORS)</summary>
+          <div class="advbody">
+            ✅ Proxy configurado y activo en Render.com. Podés cambiarlo por tu propio proxy si querés.
+            <div class="form-group" style="margin-top:10px">
+              <label>URL del proxy</label>
+              <input type="text" id="iproxy" placeholder="https://mi-proxy.onrender.com" value="https://wbd360.onrender.com" />
+            </div>
+          </div>
+        </details>
+      </div>
+    </div>
+    <button class="btn btn-orange" id="btn-upd" onclick="updatePreview()">▶&nbsp; Actualizar previsualización</button>
+  </div>
+
+  <!-- RIGHT -->
+  <div>
+    <div class="card preview-panel">
+      <div class="card-header"><div class="step-badge">4</div><h2>Previsualización en vivo</h2></div>
+      <div id="pph"><span class="bigicon">📊</span><span>Configurá el gráfico y presioná <strong>Actualizar</strong></span></div>
+      <iframe id="pframe" title="Data360 Embed preview"></iframe>
+    </div>
+
+    <div class="card embed-card">
+      <div class="card-header"><div class="step-badge">5</div><h2>Código embed — pegalo en tu artículo</h2></div>
+      <div id="ecw">
+        <div class="elabel">Como un video de YouTube, pero para datos del Banco Mundial</div>
+        <textarea id="ecode" readonly rows="4" placeholder="El código aparecerá aquí después de actualizar la previsualización…"></textarea>
+        <div class="eactions">
+          <button class="btn btn-teal" onclick="copyEmbed()">📋&nbsp; Copiar código</button>
+          <button class="btn btn-gray" onclick="openW()">🔗&nbsp; Abrir widget</button>
+          <span class="copied" id="copied">✅ ¡Copiado!</span>
+        </div>
+        <div class="tips">
+          <strong>💡 Consejo:</strong> Funciona en WordPress, Ghost, Arc, Substack y cualquier CMS que acepte HTML.
+          Cambiá <code>width</code> y <code>height</code> según tu diseño. Los datos se actualizan desde la API del Banco Mundial.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="pfooter">
+  Powered by <a href="https://data360.worldbank.org" target="_blank">World Bank Data360 API</a> &nbsp;·&nbsp;
+  <a href="https://mediaparty.org/en-global-digital-challenge-360/" target="_blank">Media Party Global Digital Challenge 360</a> — Categoría 02
+</div>
+
+<script>
+const INDS = [
+  {id:'WB_WDI_NY_GDP_PCAP_CD',     lbl:'PIB per cápita (USD corrientes)',           topic:'economy'},
+  {id:'WB_WDI_NY_GDP_MKTP_KD_ZG',  lbl:'Crecimiento del PIB (%)',                  topic:'economy'},
+  {id:'WB_WDI_FP_CPI_TOTL_ZG',     lbl:'Inflación, precios al consumidor (%)',      topic:'economy'},
+  {id:'WB_WDI_SL_UEM_TOTL_ZS',     lbl:'Desempleo (% fuerza laboral)',              topic:'economy'},
+  {id:'WB_WDI_NE_EXP_GNFS_ZS',     lbl:'Exportaciones de bs. y serv. (% PIB)',     topic:'economy'},
+  {id:'WB_WDI_GC_DOD_TOTL_GD_ZS',  lbl:'Deuda gobierno central (% PIB)',           topic:'economy'},
+  {id:'WB_WDI_SP_POP_TOTL',         lbl:'Población total',                          topic:'social'},
+  {id:'WB_WDI_SP_DYN_LE00_IN',      lbl:'Esperanza de vida al nacer (años)',         topic:'social'},
+  {id:'WB_WDI_SI_POV_DDAY',         lbl:'Pobreza extrema (< $2.15/día, %)',          topic:'social'},
+  {id:'WB_WDI_SP_URB_TOTL_IN_ZS',   lbl:'Población urbana (% del total)',           topic:'social'},
+  {id:'WB_WDI_SP_DYN_TFRT_IN',      lbl:'Tasa de fertilidad (nacimientos/mujer)',   topic:'social'},
+  {id:'WB_WDI_SH_XPD_CHEX_GD_ZS',  lbl:'Gasto en salud (% del PIB)',               topic:'health'},
+  {id:'WB_WDI_SH_MED_BEDS_ZS',      lbl:'Camas hospitalarias (por 1.000 hab.)',     topic:'health'},
+  {id:'WB_WDI_SH_DYN_MORT',         lbl:'Mortalidad infantil (por 1.000 nac. vivos)',topic:'health'},
+  {id:'WB_WDI_SH_STA_MMRT',         lbl:'Mortalidad materna (por 100.000 nac.)',    topic:'health'},
+  {id:'WB_WDI_SE_ADT_LITR_ZS',      lbl:'Tasa de alfabetización adulta (%)',        topic:'education'},
+  {id:'WB_WDI_SE_PRM_ENRR',         lbl:'Matrícula escolar primaria (% bruto)',     topic:'education'},
+  {id:'WB_WDI_SE_TER_ENRR',         lbl:'Matrícula terciaria (% bruto)',            topic:'education'},
+  {id:'WB_WDI_SE_XPD_TOTL_GD_ZS',  lbl:'Gasto público en educación (% PIB)',       topic:'education'},
+  {id:'WB_WDI_EN_ATM_CO2E_PC',      lbl:'Emisiones de CO₂ per cápita (ton.)',       topic:'environment'},
+  {id:'WB_WDI_EG_USE_ELEC_KH_PC',   lbl:'Consumo eléctrico per cápita (kWh)',      topic:'environment'},
+  {id:'WB_WDI_AG_LND_FRST_ZS',      lbl:'Superficie forestal (% del área total)',  topic:'environment'},
+  {id:'WB_WDI_EG_FEC_RNEW_ZS',      lbl:'Energía renovable (% del consumo total)', topic:'environment'},
+  {id:'WB_WDI_IT_NET_USER_ZS',      lbl:'Usuarios de Internet (% de la pob.)',     topic:'digital'},
+  {id:'WB_WDI_IT_CEL_SETS_P2',      lbl:'Suscripciones móviles (por 100 hab.)',    topic:'digital'},
+  {id:'WB_WDI_IT_NET_BBND_P2',      lbl:'Banda ancha fija (susc. por 100 hab.)',   topic:'digital'},
+];
+
+const COUNTRIES = [
+  {c:'ARG',n:'Argentina'},{c:'BRA',n:'Brasil'},{c:'CHL',n:'Chile'},{c:'COL',n:'Colombia'},
+  {c:'MEX',n:'México'},{c:'PER',n:'Perú'},{c:'URY',n:'Uruguay'},{c:'PRY',n:'Paraguay'},
+  {c:'BOL',n:'Bolivia'},{c:'ECU',n:'Ecuador'},{c:'VEN',n:'Venezuela'},{c:'PAN',n:'Panamá'},
+  {c:'CRI',n:'Costa Rica'},{c:'GTM',n:'Guatemala'},{c:'HND',n:'Honduras'},
+  {c:'SLV',n:'El Salvador'},{c:'NIC',n:'Nicaragua'},{c:'DOM',n:'Rep. Dominicana'},
+  {c:'CUB',n:'Cuba'},{c:'HTI',n:'Haití'},
+  {c:'USA',n:'EE.UU.'},{c:'CAN',n:'Canadá'},{c:'GBR',n:'Reino Unido'},
+  {c:'DEU',n:'Alemania'},{c:'FRA',n:'Francia'},{c:'ESP',n:'España'},
+  {c:'ITA',n:'Italia'},{c:'PRT',n:'Portugal'},
+  {c:'CHN',n:'China'},{c:'JPN',n:'Japón'},{c:'IND',n:'India'},
+  {c:'KOR',n:'Corea del Sur'},{c:'AUS',n:'Australia'},
+  {c:'ZAF',n:'Sudáfrica'},{c:'NGA',n:'Nigeria'},{c:'EGY',n:'Egipto'},
+  {c:'RUS',n:'Rusia'},{c:'TUR',n:'Turquía'},
+  {c:'WLD',n:'🌍 Mundo'},{c:'LAC',n:'🌎 Latinoamérica y Caribe'},
+  {c:'SSF',n:'🌍 África Sub-Sahariana'},{c:'EAS',n:'🌏 Asia Oriental y Pacífico'},
+  {c:'SAS',n:'🌏 Asia Meridional'},{c:'MNA',n:'🌍 Medio Oriente y N. África'},
+  {c:'EUU',n:'🇪🇺 Unión Europea'},{c:'OED',n:'📊 OCDE'},
+];
+
+let chart = 'line', widgetUrl = '';
+
+function filterInds() {
+  const t = document.getElementById('stopic').value;
+  const f = t ? INDS.filter(i=>i.topic===t) : INDS;
+  ['sind1','sind2'].forEach(id => {
+    const s=document.getElementById(id); s.innerHTML='';
+    f.forEach(i=>{ s.innerHTML+=`<option value="${i.id}" data-lbl="${i.lbl}">${i.lbl}</option>`; });
+  });
+  const s2=document.getElementById('sind2'); if(s2.options.length>1) s2.selectedIndex=1;
+}
+
+function renderC(q) {
+  const prev=selCodes(), lq=q.toLowerCase();
+  const list=lq?COUNTRIES.filter(c=>c.n.toLowerCase().includes(lq)||c.c.toLowerCase().includes(lq)):COUNTRIES;
+  document.getElementById('cgrid').innerHTML=list.map(c=>`
+    <label class="citem">
+      <input type="checkbox" data-code="${c.c}" onchange="updCount()"${prev.has(c.c)?' checked':''}/>
+      <span class="code">${c.c}</span><span>${c.n}</span>
+    </label>`).join('');
+}
+function filterC(){ renderC(document.getElementById('csearch').value); updCount(); }
+function selCodes(){ return new Set(Array.from(document.querySelectorAll('input[data-code]:checked')).map(cb=>cb.dataset.code)); }
+function updCount(){ const n=selCodes().size; document.getElementById('selcount').textContent=n===0?'Ninguno':n===1?'1 seleccionado':`${n} seleccionados`; }
+
+function selChart(type,el){
+  chart=type;
+  document.querySelectorAll('.ctype-btn').forEach(b=>b.classList.remove('active')); el.classList.add('active');
+  document.getElementById('pline').style.display   = type==='line'    ?'block':'none';
+  document.getElementById('pyear').style.display   = type==='line'    ?'none' :'block';
+  document.getElementById('scatter-opts').style.display = type==='scatter'?'block':'none';
+}
+
+function buildUrl(){
+  const areas=Array.from(selCodes());
+  if(!areas.length){ alert('Seleccioná al menos un país o región.'); return null; }
+  const ind1=document.getElementById('sind1'), ind2=document.getElementById('sind2');
+  const l1=ind1.options[ind1.selectedIndex]?.dataset.lbl||ind1.value;
+  const l2=ind2.options[ind2.selectedIndex]?.dataset.lbl||ind2.value;
+  const base=window.location.origin+window.location.pathname.replace('configurador.html','')+'widget.html';
+  const p=new URLSearchParams();
+  p.set('chart',chart); p.set('indicator',ind1.value); p.set('areas',areas.join(',')); p.set('ind1label',l1);
+  if(chart==='line'){ p.set('start',document.getElementById('sstart').value); p.set('end',document.getElementById('send').value); }
+  else { p.set('year',document.getElementById('syear').value); }
+  if(chart==='scatter'){ p.set('indicator2',ind2.value); p.set('ind2label',l2); }
+  const title=document.getElementById('ititle').value.trim();
+  const theme=document.getElementById('stheme').value;
+  const proxy=document.getElementById('iproxy').value.trim();
+  if(title) p.set('title',title);
+  if(theme!=='light') p.set('theme',theme);
+  if(proxy) p.set('proxy',proxy);
+  return `${base}?${p}`;
+}
+
+function updatePreview(){
+  const url=buildUrl(); if(!url)return;
+  widgetUrl=url;
+  document.getElementById('pph').style.display='none';
+  const f=document.getElementById('pframe'); f.style.display='block'; f.src=url;
+  const h=chart==='bar'?Math.max(300,selCodes().size*48+120):460;
+  document.getElementById('ecode').value=`<iframe\n  src="${url}"\n  width="100%"\n  height="${h}"\n  frameborder="0"\n  scrolling="no"\n  style="border:none; border-radius:8px;"\n  title="Visualización interactiva · World Bank Data360"\n></iframe>`;
+}
+function copyEmbed(){
+  const c=document.getElementById('ecode').value;
+  if(!c||c.includes('aparecerá')) return;
+  navigator.clipboard.writeText(c).then(()=>{ const fb=document.getElementById('copied'); fb.style.display='flex'; setTimeout(()=>fb.style.display='none',2200); });
+}
+function openW(){ if(widgetUrl) window.open(widgetUrl,'_blank'); }
+
+// INIT
+filterInds();
+const yrs=Array.from({length:65},(_,i)=>1960+i).reverse();
+['sstart','send','syear'].forEach((id,idx)=>{
+  const def=[2000,2023,2022][idx];
+  const s=document.getElementById(id);
+  yrs.forEach(y=>{ s.innerHTML+=`<option value="${y}"${y===def?' selected':''}>${y}</option>`; });
+});
+renderC('');
+['ARG','BRA','CHL'].forEach(code=>{ const cb=document.querySelector(`input[data-code="${code}"]`); if(cb) cb.checked=true; });
+updCount();
+</script>
+</body>
+</html>

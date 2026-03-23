@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa Mundial de Indicadores · Infovis JM</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #f5f4f0;
+            --card: #ffffff;
+            --border: #e0ddd7;
+            --orange: #e05a1a;
+            --dark: #1a1a1a;
+            --muted: #666;
+            --light: #999;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--bg);
+            color: var(--dark);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 15px;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* NAV */
+        nav {
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #333;
+        }
+
+        .logo {
+            font-family: 'Bebas Neue';
+            font-size: 24px;
+            color: var(--orange);
+            letter-spacing: 1px;
+            text-decoration: none;
+        }
+
+        .nav-links a {
+            color: #eee;
+            text-decoration: none;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-left: 30px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover { color: var(--orange); }
+
+        /* PAGE HEADER */
+        .page-header {
+            background: var(--dark);
+            color: #fff;
+            padding: 70px 24px 50px;
+            text-align: center;
+        }
+
+        .page-header .tag {
+            color: var(--orange);
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 3px;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 14px;
+        }
+
+        .page-header h1 {
+            font-family: 'Bebas Neue';
+            font-size: clamp(38px, 7vw, 80px);
+            line-height: 0.95;
+            letter-spacing: 4px;
+            margin-bottom: 18px;
+        }
+
+        .page-header p {
+            color: #aaa;
+            font-weight: 300;
+            max-width: 560px;
+            margin: 0 auto;
+            font-size: 16px;
+        }
+
+        /* CONTENT */
+        .content-wrap {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 24px 100px;
+        }
+
+        /* HOW TO USE */
+        .how-to-use {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--orange);
+            border-radius: 12px;
+            padding: 28px 32px;
+            margin-bottom: 40px;
+        }
+
+        .how-to-use h2 {
+            font-family: 'Bebas Neue';
+            font-size: 22px;
+            letter-spacing: 1.5px;
+            margin-bottom: 12px;
+        }
+
+        .how-to-use ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .how-to-use ul li {
+            color: var(--muted);
+            font-weight: 300;
+            padding-left: 20px;
+            position: relative;
+            font-size: 14px;
+        }
+
+        .how-to-use ul li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--orange);
+            font-weight: 500;
+        }
+
+        /* CHART CARD */
+        .chart-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 40px 36px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+            overflow: hidden;
+        }
+
+        .chart-title-row {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .chart-card h3 {
+            font-family: 'Bebas Neue';
+            font-size: 32px;
+            letter-spacing: 1px;
+            line-height: 1;
+        }
+
+        .chart-card .subtitle {
+            font-size: 13px;
+            color: var(--light);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: block;
+            margin-top: 4px;
+        }
+
+        .wbd-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 12px;
+            color: var(--muted);
+            background: #f5f4f0;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 7px 14px;
+            text-decoration: none;
+            white-space: nowrap;
+            transition: border-color 0.2s ease, color 0.2s ease;
+            flex-shrink: 0;
+        }
+
+        .wbd-badge:hover { border-color: var(--orange); color: var(--orange); }
+
+        .observable-wrap {
+            width: 100%;
+        }
+
+        .observable-wrap iframe {
+            display: block;
+            border: none;
+        }
+
+        .credit-line {
+            margin-top: 28px;
+            padding-top: 18px;
+            border-top: 1px solid var(--border);
+            font-size: 12px;
+            color: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .credit-line a {
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .credit-line a:hover { color: var(--orange); }
+
+        /* INDICATOR GRID */
+        .indicators-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .indicator-chip {
+            background: #f0ede8;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 10px 14px;
+        }
+
+        .indicator-chip .chip-label {
+            font-size: 12px;
+            color: var(--dark);
+            font-weight: 500;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .indicator-chip .chip-code {
+            font-family: monospace;
+            font-size: 11px;
+            color: var(--light);
+            letter-spacing: 0.3px;
+        }
+
+        /* API NOTE */
+        .api-note {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 28px 32px;
+            margin-top: 36px;
+        }
+
+        .api-note h4 {
+            font-family: 'Bebas Neue';
+            font-size: 20px;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .api-note p {
+            color: var(--muted);
+            font-weight: 300;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .api-note a {
+            color: var(--orange);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .api-note a:hover { text-decoration: underline; }
+
+        .api-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+
+        .api-tag {
+            background: #f0ede8;
+            border-radius: 4px;
+            padding: 3px 9px;
+            font-size: 12px;
+            color: var(--muted);
+            font-family: monospace;
+            letter-spacing: 0.5px;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--dark);
+            color: #444;
+            text-align: center;
+            padding: 50px 24px;
+        }
+
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: #eee;
+            text-decoration: none;
+            margin-bottom: 18px;
+            font-size: 14px;
+            background: #2a2a2a;
+            padding: 10px 20px;
+            border-radius: 30px;
+            transition: background 0.3s ease;
+        }
+
+        .github-link:hover { background: #333; }
+
+        @media (max-width: 700px) {
+            nav { padding: 15px 20px; }
+            .chart-card { padding: 24px 18px; }
+            .how-to-use { padding: 22px 20px; }
+            .api-note { padding: 22px 20px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">Infovis · JM</a>
+        <div class="nav-links">
+            <a href="index.html#proyectos">Proyectos</a>
+            <a href="https://github.com/juanmg1984/infovis" target="_blank">GitHub</a>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <span class="tag">Observable · Banco Mundial</span>
+        <h1>Mapa Mundial<br>de Indicadores</h1>
+        <p>Visualización geográfica de indicadores del Banco Mundial. Tamaño y color representan variables independientes — explorá dos dimensiones a la vez, en cualquier año y proyección.</p>
+    </div>
+
+    <div class="content-wrap">
+
+        <!-- HOW TO USE -->
+        <div class="how-to-use">
+            <h2>Cómo usar esta visualización</h2>
+            <ul>
+                <li>Elegí el <strong>Indicador A</strong> (tamaño) y el <strong>Indicador B</strong> (color) para ver dos variables simultáneamente — por ejemplo, tamaño = Población y color = PIB per cápita.</li>
+                <li>Usá el <strong>slider de año</strong> para ver cómo evolucionaron los indicadores entre 2000 y 2023. Los datos se actualizan automáticamente desde la API del Banco Mundial.</li>
+                <li>Cambiá la <strong>proyección</strong> del mapa (Equal Earth, Mercator, Orthographic, etc.) para explorar cómo cada una distorsiona el espacio geográfico.</li>
+                <li>Filtrá por <strong>región</strong> para enfocarte en una zona del mundo y atenuar el resto.</li>
+                <li>Hacé <strong>clic en cualquier burbuja</strong> para resaltar todos los países de esa región. Clic de nuevo para volver a la vista global.</li>
+                <li>Pasá el cursor sobre un país para ver sus valores, año del dato y <strong>ranking mundial</strong> en el indicador de tamaño.</li>
+            </ul>
+        </div>
+
+        <!-- CHART -->
+        <div class="chart-card">
+            <div class="chart-title-row">
+                <div>
+                    <h3>Proportional Symbol Map — World Bank Data</h3>
+                    <span class="subtitle">Observable · Tamaño · Color · Año · Proyección · Región</span>
+                </div>
+                <a class="wbd-badge" href="https://datahelpdesk.worldbank.org/knowledgebase/articles/898581" target="_blank" rel="noopener">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+                    </svg>
+                    World Bank API
+                </a>
+            </div>
+
+            <div class="observable-wrap">
+                <iframe width="100%" height="843" frameborder="0"
+                  src="https://observablehq.com/embed/5e92926f2b7db1aa@49?cells=viewof+sizeIndicatorId%2Cviewof+colorIndicatorId%2Cviewof+selectedRegion%2Cviewof+year%2Cviewof+proj%2CpropMap">
+                </iframe>
+            </div>
+
+            <div class="credit-line">
+                <span>Fuente de datos: <a href="https://data.worldbank.org/" target="_blank" rel="noopener">World Bank Open Data</a></span>
+                <a href="https://observablehq.com/d/5e92926f2b7db1aa" target="_blank" rel="noopener">Ver notebook en Observable →</a>
+            </div>
+        </div>
+
+        <!-- INDICATORS REFERENCE -->
+        <div class="api-note">
+            <h4>Indicadores disponibles</h4>
+            <p>Todos los datos se obtienen en tiempo real desde la <strong>World Bank Data API</strong>, usando el valor más reciente disponible por país (<code>mrv=1</code>).</p>
+            <div class="indicators-grid">
+                <div class="indicator-chip">
+                    <span class="chip-label">Población total</span>
+                    <span class="chip-code">SP.POP.TOTL</span>
+                </div>
+                <div class="indicator-chip">
+                    <span class="chip-label">PIB total (USD)</span>
+                    <span class="chip-code">NY.GDP.MKTP.CD</span>
+                </div>
+                <div class="indicator-chip">
+                    <span class="chip-label">PIB per cápita (USD)</span>
+                    <span class="chip-code">NY.GDP.PCAP.CD</span>
+                </div>
+                <div class="indicator-chip">
+                    <span class="chip-label">PIB PPP per cápita</span>
+                    <span class="chip-code">NY.GDP.PCAP.PP.CD</span>
+                </div>
+                <div class="indicator-chip">
+                    <span class="chip-label">Índice GINI</span>
+                    <span class="chip-code">SI.POV.GINI</span>
+                </div>
+                <div class="indicator-chip">
+                    <span class="chip-label">Índice Capital Humano</span>
+                    <span class="chip-code">HD.HCI.OVRL</span>
+                </div>
+                <div class="indicator-chip">
+                    <span class="chip-label">Emisiones CO₂ (kt)</span>
+                    <span class="chip-code">EN.ATM.CO2E.KT</span>
+                </div>
+                <div class="indicator-chip">
+                    <span class="chip-label">Turismo: llegadas</span>
+                    <span class="chip-code">ST.INT.ARVL</span>
+                </div>
+                <div class="indicator-chip">
+                    <span class="chip-label">Esperanza de vida</span>
+                    <span class="chip-code">SP.DYN.LE00.IN</span>
+                </div>
+                <div class="indicator-chip">
+                    <span class="chip-label">Mortalidad infantil</span>
+                    <span class="chip-code">SH.DYN.MORT</span>
+                </div>
+                <div class="indicator-chip">
+                    <span class="chip-label">Acceso electricidad (%)</span>
+                    <span class="chip-code">EG.ELC.ACCS.ZS</span>
+                </div>
+                <div class="indicator-chip">
+                    <span class="chip-label">Gasto militar (% PIB)</span>
+                    <span class="chip-code">MS.MIL.XPND.GD.ZS</span>
+                </div>
+            </div>
+            <div class="api-tags" style="margin-top:20px">
+                <span class="api-tag">api.worldbank.org/v2</span>
+                <span class="api-tag">country/all/indicator/{id}</span>
+                <span class="api-tag">mrv=1</span>
+                <span class="api-tag">format=json</span>
+                <span class="api-tag">per_page=300</span>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <a href="https://github.com/juanmg1984/infovis" class="github-link" target="_blank">
+            <svg height="20" width="20" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
+            GitHub @juanmg1984
+        </a>
+        <p>Portfolio de Visualización de Información &copy; 2026</p>
+    </footer>
+
+</body>
+</html>

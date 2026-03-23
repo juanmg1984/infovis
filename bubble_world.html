@@ -8,7 +8,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@observablehq/inspector@5/dist/inspector.css">
     <style>
         :root {
             --bg: #f5f4f0;
@@ -379,10 +378,9 @@
             </div>
 
             <div class="observable-wrap">
-                <div id="observablehq-viewof-xAxisId-1491cf4b"></div>
-                <div id="observablehq-viewof-bubbleId-1491cf4b"></div>
-                <div id="observablehq-viewof-selectedRegion-1491cf4b"></div>
-                <div id="observablehq-bubbleChart-1491cf4b"></div>
+                <iframe width="100%" height="981" frameborder="0"
+                  src="https://observablehq.com/embed/a7c400291d321a76@95?cells=viewof+xAxisId%2Cviewof+bubbleId%2Cviewof+selectedRegion%2Cviewof+xZoom%2Cviewof+xPan%2Cviewof+yZoom%2Cviewof+yPan%2CbubbleChart">
+                </iframe>
             </div>
 
             <div class="credit-line">
@@ -421,17 +419,6 @@
         <p>Portfolio de Visualización de Información &copy; 2026</p>
     </footer>
 
-    <script type="module">
-        import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@5/dist/runtime.js";
-        import define from "https://api.observablehq.com/d/a7c400291d321a76.js?v=4";
-        new Runtime().module(define, name => {
-            if (name === "viewof xAxisId")       return new Inspector(document.querySelector("#observablehq-viewof-xAxisId-1491cf4b"));
-            if (name === "viewof bubbleId")      return new Inspector(document.querySelector("#observablehq-viewof-bubbleId-1491cf4b"));
-            if (name === "viewof selectedRegion") return new Inspector(document.querySelector("#observablehq-viewof-selectedRegion-1491cf4b"));
-            if (name === "bubbleChart")          return new Inspector(document.querySelector("#observablehq-bubbleChart-1491cf4b"));
-            return ["AXES","bubbleData"].includes(name);
-        });
-    </script>
 
 </body>
 </html>

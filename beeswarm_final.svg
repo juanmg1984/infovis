@@ -1,9 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    width="800"
    height="660"
    version="1.1"
    id="svg384"
-   sodipodi:docname="beeswarm_editado.svg"
+   sodipodi:docname="beeswarm_final.svg"
    inkscape:version="1.4.2 (f4327f4, 2025-05-13)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -21,8 +22,8 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:zoom="1.5"
-     inkscape:cx="165.66667"
-     inkscape:cy="323"
+     inkscape:cx="405"
+     inkscape:cy="31.666667"
      inkscape:window-width="1366"
      inkscape:window-height="697"
      inkscape:window-x="-8"
@@ -30,13 +31,13 @@
      inkscape:window-maximized="1"
      inkscape:current-layer="svg384" />
   <rect
-     width="899.93774"
-     height="695.82672"
-     x="-47.728619"
-     y="-22.722174"
+     width="798.60443"
+     height="665.16003"
+     x="1.6047146"
+     y="-2.0555072"
      fill="#f5f4f0"
      id="background"
-     style="stroke-width:1.08903" />
+     style="stroke-width:1.00303" />
   <g
      transform="translate(50,52)"
      id="viz">
@@ -221,7 +222,7 @@
              fill="#555555"
              x="-3"
              dy="0.32em"
-             id="text11">Domingo</text>
+             id="text11">Lunes</text>
         </g>
         <g
            class="tick"
@@ -237,7 +238,7 @@
              fill="#555555"
              x="-3"
              dy="0.32em"
-             id="text12">Sábado</text>
+             id="text12">Martes</text>
         </g>
         <g
            class="tick"
@@ -253,7 +254,7 @@
              fill="#555555"
              x="-3"
              dy="0.32em"
-             id="text13">Viernes</text>
+             id="text13">Miércoles</text>
         </g>
         <g
            class="tick"
@@ -285,7 +286,7 @@
              fill="#555555"
              x="-3"
              dy="0.32em"
-             id="text15">Lunes</text>
+             id="text15">Viernes</text>
         </g>
         <g
            class="tick"
@@ -301,7 +302,7 @@
              fill="#555555"
              x="-3"
              dy="0.32em"
-             id="text16">Miércoles</text>
+             id="text16">Sábado</text>
         </g>
         <g
            class="tick"
@@ -317,7 +318,7 @@
              fill="#555555"
              x="-3"
              dy="0.32em"
-             id="text17">Martes</text>
+             id="text17">Domingo</text>
         </g>
         <text
            x="4"
@@ -330,7 +331,8 @@
     <g
        id="visualization">
       <g
-         id="Domingo">
+         id="Domingo"
+         transform="translate(0,462)">
         <g
            id="circles">
           <circle
@@ -776,9 +778,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text88" />
+               id="text88"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g89"
@@ -788,9 +790,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text89" />
+               id="text89"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g90"
@@ -800,9 +802,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text90" />
+               id="text90"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g91"
@@ -812,9 +814,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text91" />
+               id="text91"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g92"
@@ -824,9 +826,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text92" />
+               id="text92"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g93"
@@ -836,9 +838,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text93" />
+               id="text93"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g94"
@@ -848,9 +850,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text94" />
+               id="text94"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g95"
@@ -860,9 +862,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text95" />
+               id="text95"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g96"
@@ -872,9 +874,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text96" />
+               id="text96"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g97"
@@ -884,9 +886,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text97" />
+               id="text97"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g98"
@@ -896,9 +898,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text98" />
+               id="text98"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g99"
@@ -908,9 +910,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text99" />
+               id="text99"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g100"
@@ -920,9 +922,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text100" />
+               id="text100"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g101"
@@ -932,9 +934,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text101" />
+               id="text101"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g102"
@@ -944,9 +946,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text102" />
+               id="text102"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g103"
@@ -956,9 +958,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text103" />
+               id="text103"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g104"
@@ -968,9 +970,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text104" />
+               id="text104"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g105"
@@ -980,9 +982,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text105" />
+               id="text105"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g106"
@@ -992,9 +994,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text106" />
+               id="text106"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g107"
@@ -1004,9 +1006,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text107" />
+               id="text107"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g108"
@@ -1016,9 +1018,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text108" />
+               id="text108"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g109"
@@ -1028,9 +1030,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text109" />
+               id="text109"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g110"
@@ -1040,9 +1042,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text110" />
+               id="text110"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g111"
@@ -1052,9 +1054,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text111" />
+               id="text111"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g112"
@@ -1064,9 +1066,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text112" />
+               id="text112"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g113"
@@ -1076,9 +1078,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text113" />
+               id="text113"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g114"
@@ -1088,9 +1090,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text114" />
+               id="text114"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g115"
@@ -1100,9 +1102,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text115" />
+               id="text115"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g116"
@@ -1112,9 +1114,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text116" />
+               id="text116"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g117"
@@ -1124,9 +1126,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text117" />
+               id="text117"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g118"
@@ -1136,9 +1138,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text118" />
+               id="text118"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g119"
@@ -1148,9 +1150,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text119" />
+               id="text119"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g120"
@@ -1160,9 +1162,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text120" />
+               id="text120"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g121"
@@ -1172,9 +1174,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text121" />
+               id="text121"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g122"
@@ -1184,9 +1186,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text122" />
+               id="text122"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g123"
@@ -1196,9 +1198,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text123" />
+               id="text123"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g124"
@@ -1208,9 +1210,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text124" />
+               id="text124"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g125"
@@ -1220,9 +1222,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text125" />
+               id="text125"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g126"
@@ -1232,9 +1234,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text126" />
+               id="text126"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g127"
@@ -1244,9 +1246,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text127" />
+               id="text127"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g128"
@@ -1256,9 +1258,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text128" />
+               id="text128"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g129"
@@ -1268,9 +1270,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text129" />
+               id="text129"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g130"
@@ -1280,9 +1282,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text130" />
+               id="text130"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g131"
@@ -1292,9 +1294,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text131" />
+               id="text131"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g132"
@@ -1304,9 +1306,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text132" />
+               id="text132"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g133"
@@ -1316,9 +1318,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text133" />
+               id="text133"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g134"
@@ -1328,9 +1330,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text134" />
+               id="text134"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g135"
@@ -1340,9 +1342,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text135" />
+               id="text135"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g136"
@@ -1352,9 +1354,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text136" />
+               id="text136"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g137"
@@ -1364,9 +1366,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text137" />
+               id="text137"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g138"
@@ -1376,9 +1378,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text138" />
+               id="text138"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g139"
@@ -1388,9 +1390,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text139" />
+               id="text139"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g140"
@@ -1400,9 +1402,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text140" />
+               id="text140"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g141"
@@ -1412,9 +1414,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text141" />
+               id="text141"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g142"
@@ -1424,9 +1426,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text142" />
+               id="text142"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g143"
@@ -1436,9 +1438,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text143" />
+               id="text143"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g144"
@@ -1448,9 +1450,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text144" />
+               id="text144"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g145"
@@ -1460,9 +1462,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text145" />
+               id="text145"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g146"
@@ -1472,9 +1474,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text146" />
+               id="text146"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g147"
@@ -1484,9 +1486,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text147" />
+               id="text147"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g148"
@@ -1496,9 +1498,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text148" />
+               id="text148"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g149"
@@ -1508,9 +1510,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text149" />
+               id="text149"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g150"
@@ -1520,9 +1522,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text150" />
+               id="text150"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g151"
@@ -1532,9 +1534,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text151" />
+               id="text151"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g152"
@@ -1544,9 +1546,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text152" />
+               id="text152"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g153"
@@ -1556,9 +1558,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text153" />
+               id="text153"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g154"
@@ -1568,9 +1570,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text154" />
+               id="text154"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g155"
@@ -1580,9 +1582,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text155" />
+               id="text155"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g156"
@@ -1592,9 +1594,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text156" />
+               id="text156"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g157"
@@ -1604,9 +1606,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text157" />
+               id="text157"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g158"
@@ -1616,9 +1618,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text158" />
+               id="text158"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g159"
@@ -1628,14 +1630,15 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text159" />
+               id="text159"
+               transform="translate(0,0)" />
           </g>
         </g>
       </g>
       <g
-         id="Sábado">
+         id="Sábado"
+         transform="translate(0,308)">
         <g
            id="g189">
           <circle
@@ -1835,9 +1838,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text189" />
+               id="text189"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g191"
@@ -1847,9 +1850,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text190" />
+               id="text190"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g192"
@@ -1859,9 +1862,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text191" />
+               id="text191"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g193"
@@ -1871,9 +1874,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text192" />
+               id="text192"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g194"
@@ -1883,9 +1886,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text193" />
+               id="text193"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g195"
@@ -1895,9 +1898,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text194" />
+               id="text194"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g196"
@@ -1907,9 +1910,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text195" />
+               id="text195"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g197"
@@ -1919,9 +1922,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text196" />
+               id="text196"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g198"
@@ -1931,9 +1934,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text197" />
+               id="text197"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g199"
@@ -1943,9 +1946,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text198" />
+               id="text198"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g200"
@@ -1955,9 +1958,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text199" />
+               id="text199"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g201"
@@ -1967,9 +1970,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text200" />
+               id="text200"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g202"
@@ -1979,9 +1982,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text201" />
+               id="text201"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g203"
@@ -1991,9 +1994,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text202" />
+               id="text202"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g204"
@@ -2003,9 +2006,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text203" />
+               id="text203"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g205"
@@ -2015,9 +2018,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text204" />
+               id="text204"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g206"
@@ -2027,9 +2030,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text205" />
+               id="text205"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g207"
@@ -2039,9 +2042,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text206" />
+               id="text206"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g208"
@@ -2051,9 +2054,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text207" />
+               id="text207"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g209"
@@ -2063,9 +2066,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text208" />
+               id="text208"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g210"
@@ -2075,9 +2078,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text209" />
+               id="text209"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g211"
@@ -2087,9 +2090,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text210" />
+               id="text210"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g212"
@@ -2099,9 +2102,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text211" />
+               id="text211"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g213"
@@ -2111,9 +2114,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text212" />
+               id="text212"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g214"
@@ -2123,9 +2126,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text213" />
+               id="text213"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g215"
@@ -2135,9 +2138,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text214" />
+               id="text214"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g216"
@@ -2147,9 +2150,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text215" />
+               id="text215"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g217"
@@ -2159,9 +2162,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text216" />
+               id="text216"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g218"
@@ -2171,9 +2174,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text217" />
+               id="text217"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g219"
@@ -2183,9 +2186,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text218" />
+               id="text218"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g220"
@@ -2195,14 +2198,15 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text219" />
+               id="text219"
+               transform="translate(0,0)" />
           </g>
         </g>
       </g>
       <g
-         id="Viernes">
+         id="Viernes"
+         transform="translate(0,154)">
         <g
            id="g237">
           <circle
@@ -2318,9 +2322,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text237" />
+               id="text237"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g239"
@@ -2330,9 +2334,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text238" />
+               id="text238"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g240"
@@ -2342,9 +2346,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text239" />
+               id="text239"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g241"
@@ -2354,9 +2358,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text240" />
+               id="text240"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g242"
@@ -2366,9 +2370,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text241" />
+               id="text241"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g243"
@@ -2378,9 +2382,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text242" />
+               id="text242"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g244"
@@ -2390,9 +2394,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text243" />
+               id="text243"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g245"
@@ -2402,9 +2406,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text244" />
+               id="text244"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g246"
@@ -2414,9 +2418,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text245" />
+               id="text245"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g247"
@@ -2426,9 +2430,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text246" />
+               id="text246"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g248"
@@ -2438,9 +2442,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text247" />
+               id="text247"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g249"
@@ -2450,9 +2454,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text248" />
+               id="text248"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g250"
@@ -2462,9 +2466,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text249" />
+               id="text249"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g251"
@@ -2474,9 +2478,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text250" />
+               id="text250"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g252"
@@ -2486,9 +2490,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text251" />
+               id="text251"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g253"
@@ -2498,9 +2502,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text252" />
+               id="text252"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g254"
@@ -2510,9 +2514,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text253" />
+               id="text253"
+               transform="translate(0,0)" />
           </g>
         </g>
       </g>
@@ -2645,9 +2649,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text273" />
+               id="text273"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g275"
@@ -2657,9 +2661,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text274" />
+               id="text274"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g276"
@@ -2669,9 +2673,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text275" />
+               id="text275"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g277"
@@ -2681,9 +2685,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text276" />
+               id="text276"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g278"
@@ -2693,9 +2697,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text277" />
+               id="text277"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g279"
@@ -2705,9 +2709,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text278" />
+               id="text278"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g280"
@@ -2717,9 +2721,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text279" />
+               id="text279"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g281"
@@ -2729,9 +2733,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text280" />
+               id="text280"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g282"
@@ -2741,9 +2745,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text281" />
+               id="text281"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g283"
@@ -2753,9 +2757,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text282" />
+               id="text282"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g284"
@@ -2765,9 +2769,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text283" />
+               id="text283"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g285"
@@ -2777,9 +2781,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text284" />
+               id="text284"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g286"
@@ -2789,9 +2793,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text285" />
+               id="text285"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g287"
@@ -2801,9 +2805,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text286" />
+               id="text286"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g288"
@@ -2813,9 +2817,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text287" />
+               id="text287"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g289"
@@ -2825,9 +2829,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text288" />
+               id="text288"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g290"
@@ -2837,9 +2841,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text289" />
+               id="text289"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g291"
@@ -2849,9 +2853,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text290" />
+               id="text290"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g292"
@@ -2861,14 +2865,15 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text291" />
+               id="text291"
+               transform="translate(0,0)" />
           </g>
         </g>
       </g>
       <g
-         id="Lunes">
+         id="Lunes"
+         transform="translate(0,-308)">
         <g
            id="g303">
           <circle
@@ -2948,9 +2953,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text303" />
+               id="text303"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g305"
@@ -2960,9 +2965,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text304" />
+               id="text304"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g306"
@@ -2972,9 +2977,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text305" />
+               id="text305"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g307"
@@ -2984,9 +2989,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text306" />
+               id="text306"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g308"
@@ -2996,9 +3001,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text307" />
+               id="text307"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g309"
@@ -3008,9 +3013,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text308" />
+               id="text308"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g310"
@@ -3020,9 +3025,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text309" />
+               id="text309"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g311"
@@ -3032,9 +3037,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text310" />
+               id="text310"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g312"
@@ -3044,9 +3049,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text311" />
+               id="text311"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g313"
@@ -3056,9 +3061,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text312" />
+               id="text312"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g314"
@@ -3068,14 +3073,15 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text313" />
+               id="text313"
+               transform="translate(0,0)" />
           </g>
         </g>
       </g>
       <g
-         id="Miércoles">
+         id="Miércoles"
+         transform="translate(0,-231)">
         <g
            id="g326">
           <circle
@@ -3161,9 +3167,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text326" />
+               id="text326"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g328"
@@ -3173,9 +3179,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text327" />
+               id="text327"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g329"
@@ -3185,9 +3191,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text328" />
+               id="text328"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g330"
@@ -3197,9 +3203,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text329" />
+               id="text329"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g331"
@@ -3209,9 +3215,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text330" />
+               id="text330"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g332"
@@ -3221,9 +3227,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text331" />
+               id="text331"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g333"
@@ -3233,9 +3239,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text332" />
+               id="text332"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g334"
@@ -3245,9 +3251,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text333" />
+               id="text333"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g335"
@@ -3257,9 +3263,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text334" />
+               id="text334"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g336"
@@ -3269,9 +3275,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text335" />
+               id="text335"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g337"
@@ -3281,9 +3287,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text336" />
+               id="text336"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g338"
@@ -3293,14 +3299,15 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text337" />
+               id="text337"
+               transform="translate(0,0)" />
           </g>
         </g>
       </g>
       <g
-         id="Martes">
+         id="Martes"
+         transform="translate(0,-385)">
         <g
            id="g350">
           <circle
@@ -3386,9 +3393,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text350" />
+               id="text350"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g352"
@@ -3398,9 +3405,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text351" />
+               id="text351"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g353"
@@ -3410,9 +3417,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text352" />
+               id="text352"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g354"
@@ -3422,9 +3429,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text353" />
+               id="text353"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g355"
@@ -3434,9 +3441,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text354" />
+               id="text354"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g356"
@@ -3446,9 +3453,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text355" />
+               id="text355"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g357"
@@ -3458,9 +3465,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text356" />
+               id="text356"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g358"
@@ -3470,9 +3477,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text357" />
+               id="text357"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g359"
@@ -3482,9 +3489,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text358" />
+               id="text358"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g360"
@@ -3494,9 +3501,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text359" />
+               id="text359"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g361"
@@ -3506,9 +3513,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text360" />
+               id="text360"
+               transform="translate(0,0)" />
           </g>
           <g
              id="g362"
@@ -3518,9 +3525,9 @@
                y="0"
                text-anchor="middle"
                dominant-baseline="text-before-edge"
-               transform="translate(0,0)"
                style="opacity: 1;"
-               id="text361" />
+               id="text361"
+               transform="translate(0,0)" />
           </g>
         </g>
       </g>
@@ -3528,13 +3535,12 @@
   </g>
   <g
      id="legend"
-     transform="translate(600,52)">
+     transform="translate(650.66667,39.333333)">
     <g
-       transform="translate(5,0)"
+       transform="translate(5)"
        id="g374">
       <g
          class="legendSize"
-         transform="translate(0,0)"
          id="g367">
         <g
            class="legendCells"
@@ -3542,18 +3548,20 @@
            id="g366">
           <g
              class="cell"
-             transform="translate(0, 0.5)"
+             transform="translate(0,0.5)"
              id="g364">
             <circle
                class="swatch"
                r="0.5"
                fill="none"
-               stroke="#ccc"
-               id="circle363" />
+               stroke="#cccccc"
+               id="circle363"
+               cx="0"
+               cy="0" />
             <text
                class="label"
-               transform="translate( 17,&#10;          5)"
-               font-family="&quot;Arial&quot;, sans-serif"
+               transform="translate(17,5)"
+               font-family="Arial, sans-serif"
                font-size="10px"
                id="text363"><tspan
                  x="0"
@@ -3562,18 +3570,20 @@
           </g>
           <g
              class="cell"
-             transform="translate(0, 28.5)"
+             transform="translate(0,28.5)"
              id="g365">
             <circle
                class="swatch"
                r="12"
                fill="none"
-               stroke="#ccc"
-               id="circle364" />
+               stroke="#cccccc"
+               id="circle364"
+               cx="0"
+               cy="0" />
             <text
                class="label"
-               transform="translate( 17,&#10;          5)"
-               font-family="&quot;Arial&quot;, sans-serif"
+               transform="translate(17,5)"
+               font-family="Arial, sans-serif"
                font-size="10px"
                id="text364"><tspan
                  x="0"
@@ -3583,7 +3593,7 @@
         </g>
         <text
            class="legendTitle"
-           font-family="&quot;Arial&quot;, sans-serif"
+           font-family="Arial, sans-serif"
            font-size="12px"
            font-weight="bold"
            id="text366"><tspan
@@ -3601,18 +3611,19 @@
            id="g372">
           <g
              class="cell"
-             transform="translate(0, 0)"
              id="g368">
             <rect
                class="swatch"
                height="15"
                width="15"
-               style="fill: #c9b99a;"
-               id="rect367" />
+               style="fill:#c9b99a"
+               id="rect367"
+               x="0"
+               y="0" />
             <text
                class="label"
-               transform="translate( 20, 12.5)"
-               font-family="&quot;Arial&quot;, sans-serif"
+               transform="translate(20,12.5)"
+               font-family="Arial, sans-serif"
                font-size="10px"
                id="text367"><tspan
                  x="0"
@@ -3621,18 +3632,20 @@
           </g>
           <g
              class="cell"
-             transform="translate(0, 21)"
+             transform="translate(0,21)"
              id="g369">
             <rect
                class="swatch"
                height="15"
                width="15"
-               style="fill: #e8956d;"
-               id="rect368" />
+               style="fill:#e8956d"
+               id="rect368"
+               x="0"
+               y="0" />
             <text
                class="label"
-               transform="translate( 20, 12.5)"
-               font-family="&quot;Arial&quot;, sans-serif"
+               transform="translate(20,12.5)"
+               font-family="Arial, sans-serif"
                font-size="10px"
                id="text368"><tspan
                  x="0"
@@ -3641,18 +3654,20 @@
           </g>
           <g
              class="cell"
-             transform="translate(0, 42)"
+             transform="translate(0,42)"
              id="g370">
             <rect
                class="swatch"
                height="15"
                width="15"
-               style="fill: #e05a1a;"
-               id="rect369" />
+               style="fill:#e05a1a"
+               id="rect369"
+               x="0"
+               y="0" />
             <text
                class="label"
-               transform="translate( 20, 12.5)"
-               font-family="&quot;Arial&quot;, sans-serif"
+               transform="translate(20,12.5)"
+               font-family="Arial, sans-serif"
                font-size="10px"
                id="text369"><tspan
                  x="0"
@@ -3661,18 +3676,20 @@
           </g>
           <g
              class="cell"
-             transform="translate(0, 63)"
+             transform="translate(0,63)"
              id="g371">
             <rect
                class="swatch"
                height="15"
                width="15"
-               style="fill: #a83200;"
-               id="rect370" />
+               style="fill:#a83200"
+               id="rect370"
+               x="0"
+               y="0" />
             <text
                class="label"
-               transform="translate( 20, 12.5)"
-               font-family="&quot;Arial&quot;, sans-serif"
+               transform="translate(20,12.5)"
+               font-family="Arial, sans-serif"
                font-size="10px"
                id="text370"><tspan
                  x="0"
@@ -3682,7 +3699,7 @@
         </g>
         <text
            class="legendTitle"
-           font-family="&quot;Arial&quot;, sans-serif"
+           font-family="Arial, sans-serif"
            font-size="12px"
            font-weight="bold"
            id="text372"><tspan
@@ -3698,10 +3715,10 @@
      y="30"
      text-anchor="middle"
      font-family="Arial, sans-serif"
-     font-size="17"
+     font-size="17px"
      font-weight="bold"
      fill="#222222"
-     id="text374">Distancia por día de semana</text>
+     id="text374">Salidas por día de semana</text>
   <!-- ZONA GRIS: gap 2018-2020 -->
   <rect
      x="207.80"
@@ -3733,10 +3750,18 @@
      stroke-width="1.2"
      id="line375" />
   <line
-     x1="315.46664"
-     y1="356"
-     x2="315.46664"
-     y2="381"
+     x1="561.57892"
+     y1="537.92438"
+     x2="561.57892"
+     y2="562.92438"
+     stroke="#999999"
+     stroke-width="1.2"
+     id="line375-2" />
+  <line
+     x1="310.79999"
+     y1="124.66666"
+     x2="310.79999"
+     y2="149.66667"
      stroke="#999999"
      stroke-width="1.2"
      id="line376" />
@@ -3746,11 +3771,23 @@
      y="262"
      width="136"
      height="47"
-     rx="4"
+     rx="14"
      fill="#f5f4f0"
      stroke="#999999"
      stroke-width="1.2"
-     id="rect376" />
+     id="rect376"
+     ry="15.333333" />
+  <rect
+     x="601.25684"
+     y="529.92352"
+     width="136"
+     height="47"
+     rx="14"
+     fill="#f5f4f0"
+     stroke="#999999"
+     stroke-width="1.2"
+     id="rect376-8"
+     ry="15.333333" />
   <text
      x="124.66666"
      y="276.66666"
@@ -3773,7 +3810,7 @@
      xml:space="preserve"><tspan
        x="119.66666"
        y="289"
-       id="tspan1">Deje de registrar</tspan></text>
+       id="tspan2">Deje de registrar</tspan></text>
   <text
      x="119.66666"
      y="289"
@@ -3781,51 +3818,66 @@
      font-family="Arial, sans-serif"
      font-size="8.5px"
      fill="#666666"
-     id="text377-2"
+     id="text377-1"
      style="white-space:pre;inline-size:63.8062"
-     transform="translate(-13.239705,87.084469)"
+     transform="translate(551.90492,256.40433)"
      xml:space="preserve"><tspan
        x="119.66666"
        y="289"
-       id="tspan2">Reloj nuevo y<tspan
+       id="tspan3">Última salida,<tspan
    y="289"
-   id="tspan3"> </tspan></tspan><tspan
+   id="tspan5"> </tspan></tspan><tspan
        x="119.66666"
        y="299.62501"
-       id="tspan4">trabajo remoto</tspan></text>
+       id="tspan6">robo de<tspan
+   y="299.62501"
+   id="tspan7"> </tspan></tspan><tspan
+       x="119.66666"
+       y="310.25001"
+       id="tspan8">bicicleta :_(</tspan></text>
   <!-- ═══ ANN 2: 2020 Pandemia → caja izquierda, fila LUNES ═══ -->
   <!-- Dot en el eje x=300.5 a altura Lunes -->
   <circle
      cx="322.5"
-     cy="398.5"
+     cy="90.5"
      r="3.5"
      fill="#555555"
      id="circle378" />
   <!-- Conector horizontal -->
   <line
-     x1="163.66666"
-     y1="374.16666"
-     x2="313.33334"
-     y2="374.16666"
+     x1="159.66666"
+     y1="136.83333"
+     x2="309.33334"
+     y2="136.83333"
      stroke="#999999"
      stroke-width="0.979491"
      stroke-dasharray="4, 3"
      id="line378" />
+  <line
+     x1="562.83765"
+     y1="551.55444"
+     x2="600.31006"
+     y2="551.55444"
+     stroke="#999999"
+     stroke-width="0.49011"
+     stroke-dasharray="4, 3"
+     id="line378-5-1" />
   <!-- Label box -->
   <rect
-     x="56.592514"
-     y="344.92584"
+     x="57.925846"
+     y="112.25917"
      width="100.81496"
      height="47.1483"
-     rx="2.9651461"
+     rx="0"
      fill="#f5f4f0"
      stroke="#999999"
      stroke-width="1.28639"
      id="rect378"
-     style="fill:none;fill-opacity:1" />
+     style="fill:none;fill-opacity:1"
+     ry="23.57415" />
   <text
-     x="106.33334"
-     y="361.66666"
+     x="108.33334"
+     y="130.99998"
      text-anchor="middle"
      font-family="Arial, sans-serif"
      font-size="9.5px"
@@ -3833,8 +3885,21 @@
      fill="#555555"
      id="text379">2020 — Pandemia</text>
   <text
+     x="107.82597"
+     y="145.16145"
+     text-anchor="middle"
+     font-family="Arial, sans-serif"
+     font-size="9.5px"
+     font-weight="bold"
+     fill="#555555"
+     id="text379-9"><tspan
+       sodipodi:role="line"
+       id="tspan4"
+       x="107.82597"
+       y="145.16145">compre reloj nuevo</tspan></text>
+  <text
      x="103.66667"
-     y="379"
+     y="71"
      text-anchor="middle"
      font-family="Arial, sans-serif"
      font-size="8.5px"
@@ -3847,16 +3912,16 @@
   <!-- Dot en eje x=550.5 a altura Lunes -->
   <circle
      cx="565.83331"
-     cy="402.83334"
+     cy="-213.16666"
      r="3.5"
      fill="#555555"
      id="circle381" />
   <!-- Conector horizontal -->
   <line
      x1="569.33337"
-     y1="401.5"
+     y1="-214.5"
      x2="600.66669"
-     y2="401.5"
+     y2="-214.5"
      stroke="#999999"
      stroke-width="0.825324"
      stroke-dasharray="4, 3"
@@ -3864,7 +3929,7 @@
   <!-- Label box -->
   <rect
      x="600"
-     y="378"
+     y="-238"
      width="148"
      height="47"
      rx="4"
@@ -3874,7 +3939,7 @@
      id="rect381" />
   <text
      x="674"
-     y="393"
+     y="-223"
      text-anchor="middle"
      font-family="Arial, sans-serif"
      font-size="9.5"
@@ -3883,15 +3948,7 @@
      id="text382">2024 — Fin de registros</text>
   <text
      x="674"
-     y="407"
-     text-anchor="middle"
-     font-family="Arial, sans-serif"
-     font-size="8.5"
-     fill="#555"
-     id="text383">Robo de la bicicleta,</text>
-  <text
-     x="674"
-     y="418"
+     y="110"
      text-anchor="middle"
      font-family="Arial, sans-serif"
      font-size="8.5px"
@@ -3901,10 +3958,34 @@
      xml:space="preserve"
      style="text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000"
      x="69.333336"
-     y="381.33334"
+     y="-234.66666"
      id="text385"><tspan
        sodipodi:role="line"
        id="tspan384"
        x="69.333336"
-       y="381.33334" /></text>
+       y="-234.66666" /></text>
+  <rect
+     style="fill:none"
+     id="rect1"
+     width="10.666667"
+     height="48"
+     x="138"
+     y="36"
+     ry="5.3333335" />
+  <rect
+     style="fill:none"
+     id="rect2"
+     width="9.333333"
+     height="74"
+     x="119.33334"
+     y="50.666668"
+     ry="4.6666665" />
+  <rect
+     style="fill:none"
+     id="rect3"
+     width="1.3333334"
+     height="54"
+     x="132.66667"
+     y="50.666668"
+     ry="0.66666669" />
 </svg>

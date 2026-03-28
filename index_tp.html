@@ -3,30 +3,47 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Dos ruedas, muchos datos: Exploración visual de 8 años de ciclismo registrados en Strava.">
-<meta name="keywords" content="visualización de datos, strava, ciclismo, data analysis, juanmg1984">
-<meta property="og:title" content="Dos ruedas, muchos datos · Juan Manuel">
-<meta property="og:description" content="Un viaje visual a través de 3.957 km de pedaleo.">
+<title>Dos ruedas, muchos datos · ECD 2025</title>
+<meta name="description" content="Una exploración visual de 266 salidas en bicicleta registradas en Strava entre 2016 y 2024. Análisis de distancias, velocidades y clima.">
+<meta name="keywords" content="ciclismo, strava, visualización de datos, data science, ECD 2025">
+<meta property="og:title" content="Dos ruedas, muchos datos · ECD 2025">
+<meta property="og:description" content="Análisis visual de 8 años de ciclismo personal.">
 <meta property="og:image" content="banner.jpg">
-<title>Dos ruedas, muchos datos · Juan Manuel</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg:     #f5f4f0;
-    --card:   #ffffff;
-    --border: #e0ddd7;
+    --bg:     #f8f7f4;
+    --card:   rgba(255, 255, 255, 0.7);
+    --border: rgba(224, 221, 215, 0.6);
     --orange: #e05a1a;
-    --dark:   #1a1a1a;
-    --muted:  #666;
+    --orange-glow: rgba(224, 90, 26, 0.3);
+    --dark:   #121212;
+    --muted:  #555;
     --light:  #999;
+    --glass:  rgba(255, 255, 255, 0.4);
   }
   * { margin:0; padding:0; box-sizing:border-box; }
   body {
     background: var(--bg);
+    background-image: 
+      radial-gradient(at 0% 0%, rgba(224, 90, 26, 0.03) 0, transparent 50%), 
+      radial-gradient(at 50% 0%, rgba(224, 90, 26, 0.02) 0, transparent 50%);
+    background-attachment: fixed;
     color: var(--dark);
     font-family: 'DM Sans', sans-serif;
     font-size: 15px;
     line-height: 1.6;
+    scroll-behavior: smooth;
+  }
+  
+  /* SCROLL PROGRESS */
+  .scroll-progress {
+    position: fixed;
+    top: 0; left: 0; width: 0%; height: 4px;
+    background: linear-gradient(to right, var(--orange), #ff8c42);
+    z-index: 1000;
+    transition: width 0.1s ease-out;
+    box-shadow: 0 0 10px var(--orange-glow);
   }
 
   /* HEADER */
@@ -155,10 +172,19 @@
   /* VIZ CARD */
   .viz-card {
     background: var(--card);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 28px;
+    border-radius: 16px;
+    padding: 32px;
     overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.03);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+  }
+  .viz-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.06);
+    border-color: rgba(224, 90, 26, 0.2);
   }
   .tool-tag {
     display: inline-block;
@@ -216,10 +242,17 @@
   }
   .conclusion-item {
     background: var(--card);
+    backdrop-filter: blur(5px);
     border: 1px solid var(--border);
-    border-radius: 10px;
+    border-radius: 12px;
     padding: 24px;
     border-left: 3px solid var(--orange);
+    transition: all 0.3s ease;
+  }
+  .conclusion-item:hover {
+    transform: scale(1.02);
+    background: #fff;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
   }
   .conclusion-item h4 {
     font-family: 'Bebas Neue';
@@ -296,75 +329,42 @@
   }
 
   /* FOOTER */
-  footer {
-    background: var(--dark);
-    color: #444;
-    text-align: center;
-    padding: 28px 24px;
-    font-size: 11px;
-    letter-spacing: 1px;
-  }
   footer strong { color: var(--orange); }
-
-  /* PROGRESS BAR */
-  #progress-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 0%;
-    height: 4px;
-    background: linear-gradient(to right, var(--orange), #ff8c00);
-    z-index: 9999;
-    transition: width 0.1s ease-out;
-  }
-
-  /* GLASSMORPHISM */
-  .viz-card, .conclusion-item {
-    background: rgba(255, 255, 255, 0.7) !important;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.3) !important;
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  .viz-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.12);
-  }
-
-  /* SCROLL REVEAL */
-  .reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s ease-out;
-  }
-  .reveal.active {
-    opacity: 1;
-    transform: translateY(0);
-  }
 
   /* GITHUB BUTTON */
   .github-btn {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    background: var(--dark);
+    gap: 10px;
+    background: #24292e;
     color: #fff;
     padding: 10px 20px;
     border-radius: 30px;
     text-decoration: none;
+    font-family: 'DM Sans', sans-serif;
     font-size: 13px;
     font-weight: 500;
-    transition: all 0.3s ease;
-    border: 1px solid #333;
     margin-top: 20px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.1);
   }
   .github-btn:hover {
-    background: #333;
+    background: #000;
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3), 0 0 10px rgba(255,255,255,0.1);
   }
-  .github-btn svg { fill: currentColor; }
+  .github-btn svg { width: 18px; height: 18px; fill: currentColor; }
+
+  /* REVEAL ON SCROLL */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
 
   @media(max-width: 700px) {
     .stats-grid { grid-template-columns: repeat(3, 1fr); }
@@ -374,7 +374,8 @@
 </style>
 </head>
 <body>
-<div id="progress-bar"></div>
+
+<div class="scroll-progress" id="progressBar"></div>
 
 <!-- ══ HEADER ══ -->
 <header>
@@ -383,6 +384,10 @@
     <p class="subtitle">ECD · 2025 · Visualización de Datos Personales</p>
     <h1>Dos ruedas,<br>muchos datos</h1>
     <p class="intro">Una exploración visual de 266 salidas en bicicleta registradas en Strava entre 2016 y 2024. Distancias, velocidades, hábitos y clima contados a través de datos propios.</p>
+    <a href="https://github.com/juanmg1984/invovis" class="github-btn" target="_blank">
+      <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.43.372.823 1.102.823 2.222 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      Ver en GitHub
+    </a>
   </div>
 </header>
 
@@ -413,14 +418,14 @@
 </div>
 
 <!-- ══ VIZ 1: DATAWRAPPER ══ -->
-<section>
+<section class="reveal">
   <div class="wrap">
     <p class="section-label">DataWrapper · Columnas múltiples</p>
-    <h2 class="section-question">¿Cuanto tiempo le dedique a pedalear?</h2>
+    <h2 class="section-question">¿En qué meses pedaleo más?</h2>
     <p class="section-body">
       Horas totales en bicicleta por mes y año. Los meses vacíos indican períodos sin actividad.
       Mayo y agosto de 2021 concentran los picos más altos — el año de la pandemia fue
-      también el de mayor actividad.
+      también el de mayor dedicación al ciclismo.
     </p>
     <div class="viz-card">
       <span class="tool-tag">DataWrapper</span>
@@ -431,7 +436,7 @@
 </section>
 
 <!-- ══ VIZ 2: BEESWARM ══ -->
-<section>
+<section class="reveal">
   <div class="wrap">
     <p class="section-label">RAWGraphs · Beeswarm</p>
     <h2 class="section-question">¿Qué tan lejos fui según el día de la semana?</h2>
@@ -444,31 +449,129 @@
     <div class="viz-card">
       <span class="tool-tag">RAWGraphs</span>
       <div class="svg-wrap">
-        <img src="beeswarm_final.svg" alt="Gráfico Beeswarm" style="max-width: 100%; height: auto;">
+        <object data="beeswarm_final.svg" type="image/svg+xml" aria-label="Gráfico Beeswarm">
+            <img src="beeswarm_final.svg" alt="Gráfico Beeswarm" />
+        </object>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ VIZ 3: TABLEAU ══ -->
-<section>
+<!-- ══ VIZ 3: TABLEAU SCATTER CLUSTERS ══ -->
+<section class="reveal">
   <div class="wrap">
-    <p class="section-label">Tableau · Heatmap</p>
-    <h2 class="section-question">¿Cuándo salgo a rodar?</h2>
+    <p class="section-label">Tableau · Scatter plot · K-Means</p>
+    <h2 class="section-question">¿Qué tipo de ciclista soy según los datos?</h2>
     <p class="section-body">
-      Concentración de salidas por día de la semana y hora del día.
-      Los domingos al mediodía son el momento estrella —
-      25 salidas entre las 12 y las 13 hs, con las distancias más largas del registro.
+      Aplicando clustering K-Means sobre velocidad promedio, velocidad máxima, distancia
+      y ritmo cardíaco, Tableau identificó cuatro perfiles distintos de salida.
+      El tamaño de cada punto representa la distancia recorrida.
+      La variable que más pesa en la separación es el ritmo cardíaco promedio —
+      no la velocidad.
     </p>
-    <div class="placeholder">
-      <div class="ph-tool">Tableau</div>
-      <p>Visualización en construcción</p>
+
+    <!-- Tableau embed -->
+    <div class="viz-card" style="padding: 24px 24px 0;">
+      <span class="tool-tag">Tableau Public</span>
+      <div class="tableauPlaceholder" id="viz1774663460150" style="position:relative; width:100%;">
+        <noscript>
+          <a href="#"><img alt="Dashboard 1" src="https://public.tableau.com/static/images/Tp/Tp1infovis_17746616177760/Dashboard1/1_rss.png" style="border:none"/></a>
+        </noscript>
+        <object class="tableauViz" style="display:none;">
+          <param name="host_url"            value="https%3A%2F%2Fpublic.tableau.com%2F"/>
+          <param name="embed_code_version"  value="3"/>
+          <param name="site_root"           value=""/>
+          <param name="name"                value="Tp1infovis_17746616177760/Dashboard1"/>
+          <param name="tabs"                value="no"/>
+          <param name="toolbar"             value="yes"/>
+          <param name="static_image"        value="https://public.tableau.com/static/images/Tp/Tp1infovis_17746616177760/Dashboard1/1.png"/>
+          <param name="animate_transition"  value="yes"/>
+          <param name="display_static_image" value="yes"/>
+          <param name="display_spinner"     value="yes"/>
+          <param name="display_overlay"     value="yes"/>
+          <param name="display_count"       value="yes"/>
+          <param name="language"            value="es-ES"/>
+          <param name="filter"              value="publish=yes"/>
+        </object>
+      </div>
+      <script type="text/javascript">
+        (function(){
+          var divElement = document.getElementById('viz1774663460150');
+          var vizElement  = divElement.getElementsByTagName('object')[0];
+          if (divElement.offsetWidth > 800) {
+            vizElement.style.minWidth  = '420px';
+            vizElement.style.maxWidth  = '650px';
+            vizElement.style.width     = '100%';
+            vizElement.style.minHeight = '587px';
+            vizElement.style.maxHeight = '887px';
+            vizElement.style.height    = (divElement.offsetWidth * 0.75) + 'px';
+          } else if (divElement.offsetWidth > 500) {
+            vizElement.style.minWidth  = '420px';
+            vizElement.style.maxWidth  = '650px';
+            vizElement.style.width     = '100%';
+            vizElement.style.minHeight = '587px';
+            vizElement.style.maxHeight = '887px';
+            vizElement.style.height    = (divElement.offsetWidth * 0.75) + 'px';
+          } else {
+            vizElement.style.width  = '100%';
+            vizElement.style.height = '727px';
+          }
+          var scriptElement = document.createElement('script');
+          scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+          vizElement.parentNode.insertBefore(scriptElement, vizElement);
+        })();
+      </script>
     </div>
+
+    <!-- Explicación de clusters -->
+    <div style="margin-top: 28px;">
+      <p style="font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--orange); font-weight:500; margin-bottom:16px;">Los 4 perfiles identificados · 130 actividades con datos completos</p>
+      <div class="conclusion-grid">
+
+        <div class="conclusion-item" style="border-left-color: #1a7a5e;">
+          <h4>Clúster 1 · Fondos largos</h4>
+          <p>
+            18 salidas · FC promedio 133 bpm · distancia media <strong style="color:var(--dark)">56 km</strong><br>
+            Las salidas más largas del registro (hasta 90 km). Esfuerzo sostenido pero no máximo —
+            el perfil del rodador de fondo que acumula kilómetros con paciencia.
+          </p>
+        </div>
+
+        <div class="conclusion-item" style="border-left-color: #3a7fbf;">
+          <h4>Clúster 2 · FC baja, recuperación</h4>
+          <p>
+            22 salidas · FC promedio <strong style="color:var(--dark)">105 bpm</strong> · distancia media 32 km<br>
+            La frecuencia cardíaca más baja de los cuatro grupos. Salidas de recuperación activa,
+            pedaleo sin presión. Un dato atípico: velocidad máxima de 112 km/h (bajada pronunciada).
+          </p>
+        </div>
+
+        <div class="conclusion-item" style="border-left-color: var(--orange);">
+          <h4>Clúster 3 · Alta intensidad</h4>
+          <p>
+            54 salidas · FC promedio <strong style="color:var(--dark)">141 bpm</strong> · distancia media 15 km<br>
+            El grupo mayoritario (41% del total). FC más alta + distancia más corta =
+            salidas exigentes y concentradas: intervalos, sprints o tramos muy duros.
+          </p>
+        </div>
+
+        <div class="conclusion-item" style="border-left-color: #b07010;">
+          <h4>Clúster 4 · Rodadas de rutina</h4>
+          <p>
+            36 salidas · FC promedio 121 bpm · distancia media 11 km<br>
+            El perfil "mantenimiento": ni muy largo ni muy intenso. Salidas sin objetivo
+            específico, posiblemente traslados o vueltas de barrio sin carga de entrenamiento.
+          </p>
+        </div>
+
+      </div>
+    </div>
+
   </div>
 </section>
 
 <!-- ══ VIZ 4: FLOURISH ══ -->
-<section>
+<section class="reveal">
   <div class="wrap">
     <p class="section-label">Flourish · Scatter plot</p>
     <h2 class="section-question">¿El viento me frena?</h2>
@@ -486,12 +589,12 @@
 </section>
 
 <!-- ══ CONCLUSIÓN ══ -->
-<section>
+<section class="reveal">
   <div class="wrap">
     <p class="section-label">Conclusiones</p>
-    <h2 class="section-question">Dos ruedas, muchos datos</h2>
+    <h2 class="section-question">Dos ruedas, muchas historias</h2>
     <p class="section-body">
-      .
+      Los datos no mienten: el ciclismo fue mucho más que ejercicio — fue un espejo de mis etapas de vida.
     </p>
     <div class="conclusion-grid">
       <div class="conclusion-item">
@@ -499,33 +602,33 @@
         <p>2020 y 2021 concentran más del 70% de los kilómetros totales. El confinamiento transformó la bicicleta en el principal medio de movimiento y esparcimiento.</p>
       </div>
       <div class="conclusion-item">
-        <h4>El domingo es de fondos</h4>
-        <p>72 de las 266 salidas fueron en domingo — casi el triple que cualquier otro día. Las salidas más largas en tiempo y las distancias más ambiciosas siempre fueron los domingos.</p>
+        <h4>El domingo es sagrado</h4>
+        <p>72 de las 266 salidas fueron en domingo — casi el triple que cualquier otro día. Los rides más largos y las distancias más ambiciosas siempre fueron en fin de semana.</p>
       </div>
       <div class="conclusion-item">
         <h4>2021: el año pico</h4>
-        <p>120 salidas, 1.534 km, y la mejor correlación viento-velocidad del registro. No solo anduve más tiempo, más distancia, fui más rápido y más constante que en cualquier otro año.</p>
+        <p>120 salidas, 1.534 km, y la mejor correlación viento-velocidad del registro. No solo fui más — fui más rápido y más constante que en cualquier otro año.</p>
       </div>
       <div class="conclusion-item">
         <h4>Un final inesperado</h4>
-        <p>En enero de 2024 los registros se cortan por el robo de la bicicleta.</p>
+        <p>En enero de 2024 los registros se cortan. El robo de la bicicleta no solo interrumpió los datos — cerró un capítulo de ocho años de historia personal sobre dos ruedas.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ══ FOTOS ══ -->
-<section>
+<section class="reveal">
   <div class="wrap">
     <p class="section-label">Galería</p>
-    <h2 class="section-question">.</h2>
+    <h2 class="section-question">Momentos en ruta</h2>
     <p class="section-body">Algunas de las salidas detrás de los datos.</p>
     <div class="photos-grid">
       <div class="photo-item">
         <img src="foto1_empalme_lobos.jpg" alt="Empalme Lobos">
         <div class="photo-caption">
           <strong>Empalme Lobos, 2021</strong>
-          Estación abandonada — LA salida de 90 km, el más largo del registro
+          Estación abandonada — ride de 90 km, el más largo del registro
         </div>
       </div>
       <div class="photo-item">
@@ -538,14 +641,14 @@
       <div class="photo-item">
         <img src="foto3_los_durmientes.jpg" alt="Los Durmientes">
         <div class="photo-caption">
-          <strong>Los Durmientes, 2021</strong>
-          Salida grupal por Lujan, Buenos Aires
+          <strong>Los Durmientes, 2019</strong>
+          Salida grupal durante el gap de datos — el GPS no registró, los recuerdos sí
         </div>
       </div>
       <div class="photo-item">
         <img src="foto4_villars.jpg" alt="Villars">
         <div class="photo-caption">
-          <strong>Villars, 2017</strong>
+          <strong>Villars, 2019</strong>
           Estación histórica del ramal ferroviario — salida con amigos
         </div>
       </div>
@@ -575,14 +678,41 @@
   </div>
 </section>
 
-<footer>
-  <a href="https://github.com/juanmg1984/infovis" class="github-btn" target="_blank">
-    <svg height="20" width="20" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
-    Ver Repositorio en GitHub
-  </a>
-  <br><br>
-  Datos exportados de <strong>Strava</strong> · Visualizaciones: RAWGraphs · DataWrapper · Flourish · Tableau &nbsp;·&nbsp; ECD 2025
-</footer>
+  <footer>
+    <p>Proyecto desarrollado para <strong>ECD 2025</strong> · Especialización en Ciencias de Datos</p>
+    <a href="https://github.com/juanmg1984/invovis" class="github-btn" target="_blank" style="margin-top: 15px; background: rgba(255,255,255,0.05);">
+      <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.43.372.823 1.102.823 2.222 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      Repositorio del proyecto
+    </a>
+    <p style="margin-top: 20px; color: #666;">&copy; 2025 · Crafted for Interactive Visualization</p>
+  </footer>
 
+  <script>
+    // Reading Progress Bar
+    window.onscroll = function() {
+      let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      let scrolled = (winScroll / height) * 100;
+      document.getElementById("progressBar").style.width = scrolled + "%";
+    };
+
+    // Scroll Reveal Interaction
+    const revealCallback = (entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+          // observer.unobserve(entry.target); // Keep observing if we want it to hide/show
+        }
+      });
+    };
+
+    const revealObserver = new IntersectionObserver(revealCallback, {
+      threshold: 0.1
+    });
+
+    document.querySelectorAll('.reveal').forEach(el => {
+      revealObserver.observe(el);
+    });
+  </script>
 </body>
 </html>
